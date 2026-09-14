@@ -1,0 +1,914 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PricingHub · Job costing for contractors in Excel &amp; Google Sheets</title>
+<meta name="description" content="Estimate, schedule, track crew hours and costs, handle change orders, invoice and see real profit per job. 24 connected sheets for Excel and Google Sheets.">
+<meta property="og:title" content="PricingHub · Job costing for contractors in Excel &amp; Google Sheets">
+<meta property="og:url" content="https://pricing-hub-seven.vercel.app/">
+<meta property="og:description" content="From the first quote to the last payment: estimate, Gantt schedule, timesheets, change orders, invoices, budget vs actual. Excel + Google Sheets.">
+<!-- Link scrapers need absolute image URLs; update both if the site moves to another domain. -->
+<meta property="og:image" content="https://pricing-hub-seven.vercel.app/assets/og-pricinghub.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pricing-hub-seven.vercel.app/assets/og-pricinghub.jpg">
+<meta property="og:type" content="product">
+<meta name="theme-color" content="#f8f6f1">
+<script type="application/ld+json" id="productLd">
+{"@context":"https://schema.org","@type":"Product","name":"PricingHub","description":"Excel and Google Sheets workbook with 24 connected sheets: estimate, proposal, Gantt schedule, timesheets, job costs, change orders, invoices, client statements, budget vs actual, dashboard. Instant download.","image":"assets/og-pricinghub.jpg","category":"Spreadsheet template","isFamilyFriendly":true,"additionalProperty":[{"@type":"PropertyValue","name":"Sheets","value":"24"},{"@type":"PropertyValue","name":"Formats","value":"Excel 2016+, Microsoft 365, Excel for Mac, Google Sheets"}]}
+</script>
+<link rel="preload" as="image" href="assets/hero-dashboard.jpg" imagesrcset="assets/hero-dashboard-700.jpg 700w, assets/hero-dashboard.jpg 1400w" imagesizes="(max-width: 900px) 92vw, 540px" fetchpriority="high">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-var.woff2" crossorigin>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='t' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%232c5a42'/%3E%3Cstop offset='1' stop-color='%231a3a2a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='18' fill='url(%23t)'/%3E%3Cpath d='M16 44h8V28h-8zm24 0h8V34h-8z' fill='%23f0f7f3'/%3E%3Cpath d='M28 44h8V20h-8z' fill='%236ee7b7'/%3E%3C/svg%3E">
+<style>
+  /* PricingHub · the Labs family look. Porcelain ground, forest night for the dark bands with mint on them,
+     and PricingHub's own teal kept as its accent. Inter sets the words; IBM Plex Mono sets every figure. */
+  @font-face{font-family:"Inter";src:url("assets/fonts/inter-var.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+  @font-face{font-family:"IBM Plex Mono";src:url("assets/fonts/ibm-plex-mono-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+  @font-face{font-family:"IBM Plex Mono";src:url("assets/fonts/ibm-plex-mono-500.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+  :root{
+    --navy:#1c3326;--navy-2:#13241b;--teal:#2a7f8e;--teal-dark:#1b5f6b;--teal-ink:#175560;--amber:#e8a13a;--amber-ink:#8a4a0b;--red:#9a2f21;--green:#1f6b4a;
+    --ink:#0f1712;--ink-2:#48524c;--muted:#535d57;--faint:#5f6862;--bg:#f8f6f1;--card:#fff;--line:#e3e1d9;--pale:#e2eff0;--blue-in:#eaf3ff;
+    --night:#13241b;--mint:#a7f3d0;--mint-2:#6ee7b7;--on-dark:#f0f7f3;--on-dark-2:rgba(240,247,243,.78);--on-dark-3:rgba(240,247,243,.64);--dark-line:rgba(240,247,243,.14);--focus:#1f6b4a;
+    --warn-bg:#fbf0dc;--warn-line:#efd3a6;--bad-bg:#fbe9e5;--bad-line:#efc3b9;--good-bg:#e7f2eb;--good-line:#bfd9c8;
+    --action:linear-gradient(180deg,#2c5a42 0%,#1a3a2a 100%);--action-hover:linear-gradient(180deg,#33684c 0%,#1d4130 100%);--action-solid:#234a36;
+    --mint-action:linear-gradient(180deg,#c2f8de 0%,#82ecc2 100%);--mint-action-hover:linear-gradient(180deg,#d3fae8 0%,#98f0cd 100%);--mint-solid:#a2f2d0;
+    --r:16px;--r-lg:22px;--shadow:0 1px 2px rgba(28,51,38,.05),0 14px 32px -14px rgba(28,51,38,.22);--shadow-lg:0 1px 2px rgba(15,23,18,.08),0 30px 64px -28px rgba(10,20,15,.55);--ease:cubic-bezier(.32,.72,0,1);
+    --font-display:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--font-body:var(--font-display);--font-num:"IBM Plex Mono",ui-monospace,"SF Mono",SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none!important}   /* .btn sets display, which would otherwise un-hide the PayPal button the script hides */
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+  body{margin:0;font-family:var(--font-body);color:var(--ink);background-color:var(--bg);background-image:radial-gradient(circle at 1px 1px,rgba(28,51,38,.06) 1px,transparent 1.2px);background-size:24px 24px;line-height:1.55;letter-spacing:-.011em;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
+  a{color:var(--teal-ink)}
+  ::selection{background:rgba(110,231,183,.5);color:var(--ink)}
+  :focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:8px}
+  .skip{position:absolute;left:-999px;top:8px;background:var(--night);color:var(--on-dark);padding:10px 16px;border-radius:999px;z-index:100;font-weight:500;font-size:14px;text-decoration:none}
+  .skip:focus{left:12px}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  h1,h2,h3,.display{font-family:var(--font-display);letter-spacing:-.022em}
+  .num{font-family:var(--font-num);font-variant-numeric:tabular-nums;letter-spacing:0}
+
+  /* Top bar */
+  header.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:saturate(1.3) blur(14px);-webkit-backdrop-filter:saturate(1.3) blur(14px);color:var(--ink);border-bottom:1px solid rgba(28,51,38,.1)}
+  header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:600;letter-spacing:-.025em;color:var(--ink);text-decoration:none;font-size:clamp(15px,4vw,17px);min-width:0;white-space:nowrap}
+  .brand svg{width:28px;height:28px;border-radius:8px;box-shadow:0 1px 2px rgba(15,23,18,.2),0 6px 14px -8px rgba(19,36,27,.55)}
+  nav.main{display:flex;gap:2px;align-items:center}
+  nav.main a{color:var(--ink-2);text-decoration:none;font-size:14px;font-weight:500;padding:8px 13px;border-radius:999px;transition:background .2s,color .2s}
+  nav.main a:hover{color:var(--ink);background:rgba(28,51,38,.05)}
+  nav.main a.cta{background:var(--action-solid);background-image:var(--action);color:#fff;margin-left:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 1px 2px rgba(15,23,18,.22)}
+  nav.main a.cta:hover{background-image:var(--action-hover);color:#fff}
+
+
+  /* Mobile menu */
+  .menu-btn{display:none;width:44px;height:44px;border-radius:999px;border:1px solid rgba(28,51,38,.18);background:#fff;color:var(--ink);cursor:pointer;align-items:center;justify-content:center}
+  .menu-btn svg{width:22px;height:22px}
+  .menu-btn .x{display:none}.menu-btn[aria-expanded="true"] .x{display:block}.menu-btn[aria-expanded="true"] .bars{display:none}
+  .menu{display:none;position:fixed;left:0;right:0;top:64px;z-index:19;background:var(--bg);border-bottom:1px solid rgba(28,51,38,.1);box-shadow:0 24px 48px -20px rgba(15,23,18,.35);padding:10px 16px 16px}
+  .menu[data-open="true"]{display:block}
+  .menu a{display:flex;justify-content:space-between;align-items:center;color:var(--ink);text-decoration:none;font:600 17px var(--font-display);letter-spacing:-.02em;padding:14px 8px;border-bottom:1px solid rgba(28,51,38,.1)}
+  .menu a small{font:400 12px var(--font-num);letter-spacing:0;color:var(--muted)}
+  .menu a:last-child{border-bottom:0}
+  .menu a.cta{background:var(--action-solid);background-image:var(--action);color:#fff;border-radius:999px;justify-content:center;margin-top:10px;padding:14px}
+  .menu-backdrop{display:none;position:fixed;inset:64px 0 0 0;z-index:18;background:rgba(10,20,15,.45)}
+  .menu-backdrop[data-open="true"]{display:block}
+  @media (max-width:900px){.menu-btn{display:inline-flex}}
+  @media (prefers-reduced-motion:no-preference){.menu[data-open="true"]{animation:menuIn .24s var(--ease)}}
+  @keyframes menuIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;font-weight:500;letter-spacing:-.012em;text-decoration:none;border:0;cursor:pointer;font-size:16px;font-family:var(--font-display);transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .2s;line-height:1}
+  .btn:hover{transform:translateY(-1px)}
+  .btn:active{transform:translateY(0) scale(.985)}
+  .btn-primary{background:var(--action-solid);background-image:var(--action);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 1px 2px rgba(15,23,18,.25),0 10px 24px -12px rgba(19,36,27,.65)}
+  .btn-primary:hover{background-image:var(--action-hover)}
+  .hero .btn-primary,.band .btn-primary,.stick .btn-primary{background:var(--mint-solid);background-image:var(--mint-action);color:var(--night);box-shadow:inset 0 1px 0 rgba(255,255,255,.65),0 12px 28px -14px rgba(110,231,183,.6)}
+  .hero .btn-primary:hover,.band .btn-primary:hover,.stick .btn-primary:hover{background-image:var(--mint-action-hover)}
+  .btn-ghost{background:rgba(255,255,255,.06);color:var(--on-dark);border:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.24)}
+  .btn-ghost:hover{background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.38)}
+  .btn-soft{background:#fff;color:var(--ink);box-shadow:0 0 0 1px rgba(28,51,38,.16),0 1px 2px rgba(28,51,38,.06)}
+  .btn-soft:hover{background:#fff;box-shadow:0 0 0 1px rgba(28,51,38,.3),0 10px 22px -12px rgba(28,51,38,.32)}
+  .btn[aria-disabled="true"]{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+
+  /* Hero */
+  .hero{position:relative;background:var(--night);color:var(--on-dark);padding:84px 0 64px;overflow:hidden;isolation:isolate;--focus:var(--mint-2)}
+  .hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(240,247,243,.08) 1px,transparent 1.3px);background-size:24px 24px;mask-image:radial-gradient(ellipse at 70% 40%,#000 25%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse at 70% 40%,#000 25%,transparent 80%);z-index:-1}
+  .hero::after{content:"";position:absolute;right:-180px;top:-160px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(52,211,153,.2),transparent 65%);z-index:-1}
+  .hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font:500 12px/1.3 var(--font-num);letter-spacing:.1em;text-transform:uppercase;color:var(--mint);margin-bottom:18px}
+  .eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--mint-2)}
+  h1{font-size:clamp(36px,4.9vw,58px);line-height:1.04;margin:0 0 20px;font-weight:500;letter-spacing:-.04em}
+  h1 em{font-style:normal;color:var(--mint)}
+  .lead{font-size:18.5px;color:var(--on-dark-2);margin:0 0 30px;max-width:560px;letter-spacing:-.012em}
+  .cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .price-line{display:flex;align-items:baseline;gap:10px;margin-top:18px;color:var(--on-dark-2);font-size:15px}
+  .price-line b{font-family:var(--font-num);color:#fff;font-size:24px;font-weight:500;letter-spacing:-.01em}
+  .hero-shot{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.14);background:#fff;padding:10px;transform:rotate(-1.2deg);transition:transform .6s var(--ease)}
+  .hero-shot:hover{transform:rotate(0)}
+  .hero-shot img{display:block;width:100%;height:auto;border-radius:12px}
+  .proof{display:flex;flex-wrap:wrap;gap:22px;margin-top:34px;padding-top:22px;border-top:1px solid var(--dark-line);color:var(--on-dark-2);font-size:14px}
+  .proof b{display:block;font-family:var(--font-num);color:#fff;font-size:20px;font-weight:500}
+
+
+  /* Sheet map */
+  .map{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;display:grid;grid-template-columns:1.35fr 1fr;gap:26px;margin:0 0 40px;box-shadow:0 1px 2px rgba(28,51,38,.05)}
+  .map-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .map-col h4{margin:0 0 10px;font:500 11px/1.3 var(--font-num);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px}
+  .map-col h4 i{width:10px;height:10px;border-radius:3px;display:inline-block}
+  .chip{display:block;width:100%;text-align:left;border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;margin-bottom:6px;font:500 13.5px var(--font-body);letter-spacing:-.01em;color:var(--ink);cursor:pointer;transition:background .15s,border-color .15s,color .15s,transform .25s var(--ease),opacity .2s}
+  .chip:hover{border-color:rgba(28,51,38,.32);transform:translateX(2px)}
+  .chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+  .map.has-sel .chip:not([aria-pressed="true"]):not(.feeds):not(.fed){opacity:.38}
+  .chip.feeds{background:var(--pale);border-color:var(--teal);color:var(--teal-ink)}
+  .chip.fed{background:var(--warn-bg);border-color:var(--amber);color:var(--amber-ink)}
+  .map-detail{background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:20px;min-height:280px;display:flex;flex-direction:column}
+  .map-detail h3{margin:0 0 4px;font-size:20px;font-weight:600;color:var(--ink)}
+  .map-detail .stage{font:500 11px/1.3 var(--font-num);letter-spacing:.1em;text-transform:uppercase;color:var(--teal-ink);margin-bottom:10px}
+  .map-detail p{margin:0 0 14px;color:var(--muted);font-size:15px}
+  .map-detail .rel{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .map-detail .rel div{font-size:13.5px;color:var(--ink)}
+  .map-detail .rel b{display:block;font:500 11px/1.3 var(--font-num);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+  .map-detail .rel .in b{color:var(--amber-ink)}.map-detail .rel .out b{color:var(--teal-ink)}
+  .map-detail .rel span{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px 9px;margin:0 4px 4px 0;font-size:12.5px}
+  .map-key{display:flex;flex-wrap:wrap;gap:16px;align-items:center;font-size:13px;color:var(--muted);margin-top:14px}
+  .map-key i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:6px;border:1.5px solid}
+  .map-key .k1{background:var(--navy);border-color:var(--navy)}.map-key .k2{background:var(--warn-bg);border-color:var(--amber)}.map-key .k3{background:var(--pale);border-color:var(--teal)}
+  .map-tools{margin-left:auto;display:flex;gap:8px}
+  @media (max-width:900px){.map{grid-template-columns:1fr}.map-cols{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:520px){.map-cols{grid-template-columns:1fr 1fr;gap:10px}.chip{font-size:13px;padding:7px 8px}}
+  @media print{
+    body{background:#fff;background-image:none;padding:0}
+    header.top,.hero,.tour,#fit,#trade,#start,#included,#faq,.band,footer,.stick,.map-tools,.sub,.kicker,.share,.calc-foot,.menu,.menu-backdrop{display:none!important}
+    body[data-print="map"] .calc{display:none!important}
+    body[data-print="calc"] #features{display:none!important}
+    body:not([data-print="calc"]) .calc{display:none!important}
+    .calc{border:0;padding:0}.calc .panel,.calc .tile,.calc .bar,.calc .insight{border-color:#bbb;box-shadow:none;background:#fff!important;color:#000!important}
+    .calc .tile.big{background:#fff!important;border:2px solid #000}.calc .tile.big .lbl,.calc .tile.big .val{color:#000!important}
+    .calc-grid{grid-template-columns:1fr 1fr;gap:16px}.calc .inp input{background:#fff;color:#000;border-color:#bbb}
+    .calc-print-head{display:block!important}
+    section#features{padding:0}
+    #features > .wrap > h2{display:none}
+    .map{grid-template-columns:1fr 1fr;border:0;padding:0;gap:18px;page-break-inside:avoid;box-shadow:none}
+    .map.has-sel .chip{opacity:1}
+    .chip{break-inside:avoid;margin-bottom:4px;padding:5px 8px;font-size:12px}
+    .map-detail{min-height:0;border-color:#999}
+    .print-only{display:block!important}
+    .reveal{opacity:1!important;transform:none!important}
+  }
+  .print-only{display:none;font:600 24px var(--font-display);letter-spacing:-.02em;color:var(--ink);margin:0 0 4px}
+  .calc-print-head{display:none;font:600 22px var(--font-display);letter-spacing:-.02em;color:#000;margin:0 0 14px}
+  .calc-print-head small{display:block;font:400 13px var(--font-body);color:#444;margin-top:4px}
+  .print-sub{display:none}
+  @media print{.print-sub{display:block;color:#555;font-size:13px;margin:0 0 14px}}
+
+  /* Sections */
+  section{padding:80px 0}
+  .kicker{font:500 12px/1.3 var(--font-num);letter-spacing:.1em;text-transform:uppercase;color:var(--teal-ink);margin:0 0 12px}
+  h2{font-size:clamp(28px,3.2vw,40px);margin:0 0 12px;color:var(--ink);font-weight:500;line-height:1.08;letter-spacing:-.035em}
+  .sub{color:var(--muted);font-size:17px;margin:0 0 36px;max-width:700px}
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .7s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+
+  /* Calculator */
+  .calc{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .calc-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:32px;align-items:start}
+  .panel{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px}
+  .panel h3{margin:0 0 4px;font-size:18px;font-weight:600;color:var(--ink)}
+  .panel .hint{margin:0 0 18px;font-size:14px;color:var(--muted)}
+  .field{display:grid;grid-template-columns:1fr 150px;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+  .field:last-of-type{border-bottom:0}
+  .field label{font-size:15px;font-weight:500;color:var(--ink)}
+  .field small{display:block;font-weight:400;color:var(--muted);font-size:13px}
+  .inp{position:relative}
+  .inp input{width:100%;padding:10px 12px;padding-left:var(--pad-l,12px);padding-right:var(--pad-r,12px);border:1px solid #c9d5dd;border-radius:10px;background:var(--blue-in);color:#1f4e9a;font:500 16px var(--font-num);text-align:right;transition:border-color .15s,box-shadow .2s}
+  .inp input:focus{outline:0;border-color:var(--teal);box-shadow:0 0 0 4px rgba(42,127,142,.18)}
+  .inp input:invalid{border-color:var(--red)}
+  .inp[data-prefix]::before{content:attr(data-prefix);position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--faint);font:500 15px var(--font-num);pointer-events:none}
+  .inp[data-suffix]::after{content:attr(data-suffix);position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--faint);font:500 15px var(--font-num);pointer-events:none}
+  .inp[data-prefix] input{--pad-l:26px}.inp[data-suffix] input{--pad-r:30px}
+  .results{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .tile{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;min-height:96px;box-shadow:0 1px 2px rgba(28,51,38,.05)}
+  .tile .lbl{font-size:13px;color:var(--muted);margin-bottom:6px}
+  .tile .val{font-family:var(--font-num);font-size:26px;font-weight:500;color:var(--ink);letter-spacing:-.02em;transition:color .2s}
+  .tile.big{grid-column:1/-1;background:var(--navy);color:#fff;border-color:var(--navy)}
+  .tile.big .lbl{color:var(--on-dark-2)}.tile.big .val{color:#fff;font-size:34px}
+  .tile.warn{background:var(--warn-bg);border-color:var(--warn-line)}.tile.warn .val{color:var(--amber-ink)}
+  .tile.bad{background:var(--bad-bg);border-color:var(--bad-line)}.tile.bad .val{color:var(--red)}
+  .tile.good{background:var(--good-bg);border-color:var(--good-line)}.tile.good .val{color:var(--green)}
+  .bar{grid-column:1/-1;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+  .bar .lbl{font-size:13px;color:var(--muted);margin-bottom:10px;display:flex;justify-content:space-between}
+  .bar .track{height:14px;border-radius:999px;background:#ecebe5;overflow:hidden;display:flex}
+  .bar .seg{height:100%;transition:width .35s var(--ease)}
+  .bar .seg.cost{background:#6f7f75}.bar .seg.oh{background:#c4ccc6}.bar .seg.profit{background:var(--teal)}
+  .bar .legend{display:flex;gap:16px;margin-top:10px;font-size:13px;color:var(--muted)}
+  .bar .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+  .insight{grid-column:1/-1;font-size:15px;color:var(--ink);background:var(--pale);border-radius:var(--r);padding:14px 18px;line-height:1.5}
+  .insight b{color:var(--teal-ink)}
+  .calc-foot{font-size:13px;color:var(--muted);margin-top:14px}
+
+  /* Feature grid */
+  .flow{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 36px}
+  .flow span{background:var(--navy);color:#fff;padding:8px 14px;border-radius:999px;font-size:13.5px;font-weight:500;font-family:var(--font-display)}
+  .flow span:nth-child(even){background:var(--teal-dark)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px;transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .2s}
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:rgba(28,51,38,.2)}
+  .card h3{margin:0 0 8px;font-size:17px;font-weight:600;color:var(--ink)}
+  .card p{margin:0;color:var(--muted);font-size:15px}
+  .card .ic{width:42px;height:42px;border-radius:12px;background:var(--pale);display:flex;align-items:center;justify-content:center;margin-bottom:14px;color:var(--teal-ink)}
+  .card .ic svg{width:22px;height:22px}
+
+
+  /* First ten minutes */
+  .start{background:var(--night);color:var(--on-dark);position:relative;overflow:hidden;--focus:var(--mint-2)}
+  .start::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(240,247,243,.07) 1px,transparent 1.3px);background-size:24px 24px;pointer-events:none}
+  .start .wrap{position:relative}
+  .start .kicker{color:var(--mint)}.start h2{color:#fff}.start .sub{color:var(--on-dark-2)}
+  .steps{display:grid;grid-template-columns:380px 1fr;gap:28px;align-items:start}
+  .step-list{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none}
+  .step{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start;width:100%;text-align:left;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px 14px;color:var(--on-dark-2);cursor:pointer;font:inherit;transition:background .15s,border-color .15s,transform .25s var(--ease)}
+  .step:hover{background:rgba(255,255,255,.09);transform:translateX(2px)}
+  .step .n{width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;font:500 13px var(--font-num);color:#fff}
+  .step b{display:block;font-family:var(--font-display);font-weight:600;font-size:15px;letter-spacing:-.015em;color:#fff;margin-bottom:2px}
+  .step small{font-size:12.5px;color:var(--on-dark-3)}
+  .step[aria-current="step"]{background:#fff;border-color:#fff;color:var(--muted)}
+  .step[aria-current="step"] .n{background:var(--teal-dark);border-color:var(--teal-dark)}
+  .step[aria-current="step"] b{color:var(--ink)}.step[aria-current="step"] small{color:var(--teal-ink)}
+  .stage-card{background:#fff;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-lg);color:var(--ink);position:sticky;top:84px;--focus:#1f6b4a}
+  .stage-img{position:relative;aspect-ratio:5/3;background:#eef0ea;overflow:hidden}
+  .stage-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top left;transition:opacity .35s ease}
+  .stage-img img.out{opacity:0}
+  .stage-img .tag{position:absolute;left:14px;top:14px;background:rgba(19,36,27,.9);color:#fff;font:500 11px/1.3 var(--font-num);letter-spacing:.1em;text-transform:uppercase;padding:6px 11px;border-radius:999px}
+  .stage-body{padding:20px 22px 22px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start}
+  .stage-body h3{margin:0 0 6px;font-size:20px;font-weight:600;color:var(--ink)}
+  .stage-body p{margin:0;color:var(--muted);font-size:15px;max-width:60ch}
+  .stage-nav{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+  .stage-nav .count{font:500 13px var(--font-num);color:var(--muted)}
+  .stage-nav .btns{display:flex;gap:8px}
+  .progress{height:4px;background:#ecebe5}
+  .progress i{display:block;height:100%;background:var(--teal);transition:width .35s var(--ease)}
+  .start .after{margin-top:22px;font-size:14px;color:var(--on-dark-2)}
+  @media (max-width:900px){
+    .steps{grid-template-columns:1fr}
+    .step-list{flex-direction:row;overflow-x:auto;gap:8px;padding-bottom:6px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+    .step{flex:0 0 auto;scroll-snap-align:start;grid-template-columns:28px 1fr;padding:9px 12px 9px 10px;align-items:center;border-radius:999px}
+    .step .n{width:26px;height:26px;font-size:12px}
+    .step b{display:none}
+    .step small{font-size:14px;font-weight:600;color:#fff;white-space:nowrap}
+    .step[aria-current="step"] small{color:var(--ink)}
+    .stage-card{position:static}
+    .stage-body{grid-template-columns:1fr}.stage-nav{flex-direction:row;justify-content:space-between;align-items:center;width:100%}
+  }
+
+  /* Tour */
+  .tour{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+  .shot{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:0 1px 2px rgba(28,51,38,.05);padding:0;text-align:left;cursor:zoom-in;font:inherit;color:inherit;transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+  .shot:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+  .shot img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}
+  .shot .cap{padding:12px 16px 14px;font-size:14px;color:var(--muted);display:flex;justify-content:space-between;gap:10px;align-items:center}
+  .shot .cap b{color:var(--ink);font-weight:600;letter-spacing:-.012em;display:block;margin-bottom:2px;font-size:15px}
+  .shot .cap .zoom{flex:none;width:32px;height:32px;border-radius:999px;background:var(--pale);display:flex;align-items:center;justify-content:center;color:var(--teal-ink)}
+  .swipe-hint{display:none;font-size:13px;color:var(--muted);margin:0 0 10px}
+  @media (max-width:760px){
+    .gallery{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding:4px 4px 14px;margin:0 -4px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+    .gallery .shot{flex:0 0 84%;scroll-snap-align:start;transform:none}
+    .swipe-hint{display:block}
+  }
+  dialog.lb{border:0;padding:0;background:transparent;max-width:min(96vw,1200px);width:100%}
+  dialog.lb::backdrop{background:rgba(10,20,15,.86);backdrop-filter:blur(4px)}
+  .lb-box{background:#fff;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-lg);display:grid;grid-template-rows:auto 1fr auto}
+  .lb-head{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line);gap:12px}
+  .lb-head b{font-family:var(--font-display);font-weight:600;letter-spacing:-.015em;color:var(--ink);font-size:16px}
+  .lb-head span{font-size:13px;color:var(--muted)}
+  .lb-body{background:#f1efe9;display:flex;align-items:center;justify-content:center;max-height:74vh;overflow:auto}
+  .lb-body img{display:block;max-width:100%;max-height:74vh;height:auto}
+  .lb-foot{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;gap:12px;flex-wrap:wrap}
+  .lb-foot p{margin:0;font-size:14px;color:var(--muted)}
+  .lb-nav{display:flex;gap:8px}
+  .ibtn{width:40px;height:40px;border-radius:999px;border:1px solid rgba(28,51,38,.16);background:#fff;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:18px;transition:background .15s,border-color .15s}
+  .ibtn:hover{background:var(--bg);border-color:rgba(28,51,38,.3)}
+
+
+  /* Sample documents */
+  .docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:26px}
+  .doc{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;text-decoration:none;color:var(--ink);transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .2s}
+  .doc:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:rgba(28,51,38,.2)}
+  .doc .ico{flex:none;width:44px;height:54px;border-radius:6px;background:var(--pale);border:1px solid #c6dfe2;position:relative}
+  .doc .ico::before{content:"";position:absolute;left:9px;right:9px;top:12px;height:3px;background:var(--teal);box-shadow:0 8px 0 #9fc9d1,0 16px 0 #9fc9d1,0 24px 0 #9fc9d1}
+  .doc b{display:block;font-family:var(--font-display);font-weight:600;letter-spacing:-.012em;font-size:15px;color:var(--ink);margin-bottom:2px}
+  .doc small{font-size:13px;color:var(--muted)}
+
+  /* Fit check */
+  .seg{display:inline-flex;flex-wrap:wrap;gap:4px;background:#fff;padding:4px;border-radius:22px;margin-bottom:18px;box-shadow:inset 0 0 0 1px rgba(28,51,38,.14)}
+  .seg button{border:0;background:transparent;padding:9px 16px;border-radius:999px;font:500 14.5px var(--font-display);letter-spacing:-.01em;color:var(--ink-2);cursor:pointer;transition:background .2s,color .2s}
+  .seg button:hover{color:var(--ink);background:rgba(28,51,38,.05)}
+  .seg button[aria-pressed="true"]{background:var(--action-solid);background-image:var(--action);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 1px 2px rgba(15,23,18,.2)}
+  .fit{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;display:grid;grid-template-columns:1fr 1fr;gap:22px;box-shadow:0 1px 2px rgba(28,51,38,.05)}
+  .fit h3{margin:0 0 10px;font-size:17px;font-weight:600;color:var(--ink)}
+  .fit ul{margin:0;padding:0;list-style:none}
+  .fit li{position:relative;padding-left:28px;margin:0 0 9px;font-size:15px}
+  .fit li::before{content:"";position:absolute;left:0;top:6px;width:16px;height:16px;border-radius:50%;background:var(--green);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.2 16.6 4.8 12.2l1.4-1.4 3 3 8.6-8.6 1.4 1.4z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.2 16.6 4.8 12.2l1.4-1.4 3 3 8.6-8.6 1.4 1.4z'/%3E%3C/svg%3E") center/contain no-repeat}
+  .fit li.note{color:var(--amber-ink)}
+  .fit li.note::before{background:var(--amber);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M11 7h2v7h-2zm0 8h2v2h-2z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M11 7h2v7h-2zm0 8h2v2h-2z'/%3E%3C/svg%3E") center/contain no-repeat}
+  .fit .how{background:var(--bg);border-radius:var(--r);padding:16px 18px;font-size:14.5px;color:var(--muted)}
+  .fit .how ol{margin:8px 0 0;padding-left:20px}
+  .fit .how li{padding-left:0;margin-bottom:6px}
+  .fit .how li::before{display:none}
+
+
+  /* Trade fit */
+  .trade{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;box-shadow:0 1px 2px rgba(28,51,38,.05)}
+  .trade-head{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+  .trade-head h3{margin:0;font-size:18px;font-weight:600;color:var(--ink)}
+  .trade-head p{margin:4px 0 0;font-size:14px;color:var(--muted)}
+  .codes{display:grid;grid-template-columns:repeat(2,1fr);gap:0 28px}
+  .code{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .code .id{font:500 13px var(--font-num);color:var(--muted)}
+  .code .nm{color:var(--ink)}
+  .code .nm s{color:var(--faint);text-decoration:line-through;margin-right:6px}
+  .code .nm b{color:var(--ink);font-weight:600}
+  .code .cat{font:500 10.5px/1.4 var(--font-num);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--bg);border-radius:999px;padding:3px 8px;white-space:nowrap}
+  .code.renamed .id{color:var(--teal-ink)}
+  .trade-foot{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-top:16px;font-size:14px;color:var(--muted)}
+  .trade-foot .copy{position:relative}
+  .btn-soft.done{background:var(--good-bg);color:var(--green);box-shadow:0 0 0 1px var(--good-line)}
+  @media (max-width:760px){.codes{grid-template-columns:1fr}.code{grid-template-columns:30px 1fr;align-items:start;padding:9px 0}.code .nm s{display:inline;font-size:12.5px}.code .cat{grid-column:2;justify-self:start;font-size:10px;padding:2px 7px;margin-top:2px}}
+
+  /* Included */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
+  ul.checks{list-style:none;padding:0;margin:0}
+  ul.checks li{position:relative;padding-left:32px;margin:0 0 12px;font-size:16px}
+  ul.checks li::before{content:"";position:absolute;left:0;top:5px;width:18px;height:18px;border-radius:50%;background:var(--teal);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.2 16.6 4.8 12.2l1.4-1.4 3 3 8.6-8.6 1.4 1.4z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.2 16.6 4.8 12.2l1.4-1.4 3 3 8.6-8.6 1.4 1.4z'/%3E%3C/svg%3E") center/contain no-repeat}
+  .stat{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
+  .stat div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 12px;text-align:center}
+  .stat b{display:block;font-family:var(--font-num);font-weight:500;font-size:24px;color:var(--ink)}
+  .stat span{font-size:13px;color:var(--muted)}
+
+  /* FAQ */
+  details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:0;margin-bottom:10px;overflow:hidden}
+  summary{cursor:pointer;font-weight:600;letter-spacing:-.015em;color:var(--ink);font-size:16px;padding:16px 20px;list-style:none;display:flex;justify-content:space-between;align-items:center;font-family:var(--font-display)}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-family:var(--font-num);color:var(--teal-ink);font-size:20px;transition:transform .3s var(--ease)}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{margin:0;padding:0 20px 16px;color:var(--muted)}
+
+  /* Buy band, footer, sticky bar */
+  .band{background:var(--night);color:var(--on-dark);text-align:center;position:relative;overflow:hidden;--focus:var(--mint-2)}
+  .band::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(240,247,243,.07) 1px,transparent 1.3px);background-size:24px 24px}
+  .band .wrap{position:relative}
+  .band h2{color:#fff}.band .sub{color:var(--on-dark-2);margin-left:auto;margin-right:auto}
+  .note{font-size:13px;color:var(--on-dark-3);margin-top:16px}
+  footer{padding:36px 0;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+  .footer-labs{flex-basis:100%;font-size:13px}
+  .footer-labs a{color:var(--ink-2);text-decoration:underline;text-decoration-color:rgba(28,51,38,.3);text-underline-offset:3px}
+  .footer-labs a:hover{color:var(--teal-ink);text-decoration-color:currentColor}
+  .stick{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(19,36,27,.96);backdrop-filter:blur(10px);color:#fff;padding:10px 16px;display:none;align-items:center;justify-content:space-between;gap:12px;transform:translateY(110%);transition:transform .4s var(--ease);border-top:1px solid rgba(255,255,255,.1);--focus:var(--mint-2)}
+  .stick.on{transform:none}
+  body:has(.menu[data-open="true"]) .stick{transform:translateY(110%)}
+  .stick .p{font-family:var(--font-num);font-weight:500;font-size:18px}
+  .stick small{display:block;font-size:12px;color:var(--on-dark-2);font-family:var(--font-body);font-weight:400}
+  .stick .btn{padding:12px 18px;font-size:15px}
+
+  @media (max-width:900px){
+    /* Touch targets: 44 px for every control a thumb has to hit; map chips stay at 40 px to keep the 23-sheet grid on one screen */
+    .seg button,.btn-soft,.ibtn,.menu-btn,.step,.doc,.shot .cap .zoom{min-height:44px}
+    .ibtn,.shot .cap .zoom{min-width:44px}
+    .btn-soft{display:inline-flex;align-items:center}
+    .chip{min-height:40px;display:flex;align-items:center}
+    .brand{min-height:44px}
+    .hero .wrap,.calc-grid,.two,.fit{grid-template-columns:1fr}
+    .hero{padding:52px 0 44px}.hero-shot{transform:none}
+    nav.main{display:none}
+    section{padding:56px 0}
+    .stick{display:flex}
+    body{padding-bottom:72px}
+  }
+  @media (max-width:520px){
+    .proof{display:grid;grid-template-columns:1fr 1fr;gap:16px 20px}
+    .field{grid-template-columns:1fr}.field .inp{width:100%}
+    .results{grid-template-columns:1fr}
+    .stat{grid-template-columns:repeat(3,1fr)}
+    .lb-body{max-height:60vh}.lb-body img{max-height:60vh}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="PricingHub, back to top">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="brandTile" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2c5a42"/><stop offset="1" stop-color="#1a3a2a"/></linearGradient></defs><rect width="64" height="64" rx="18" fill="url(#brandTile)"/><path d="M16 44h8V28h-8zm24 0h8V34h-8z" fill="#f0f7f3"/><path d="M28 44h8V20h-8z" fill="#6ee7b7"/></svg>
+      PricingHub
+    </a>
+    <nav class="main" aria-label="Page sections">
+      <a href="#calc">Profit check</a>
+      <a href="#features">What it does</a>
+      <a href="#start">First ten minutes</a>
+      <a href="#tour">Tour</a>
+      <a href="#fit">Fit check</a>
+      <a href="#faq">FAQ</a>
+      <a class="cta" href="#buy">Get it</a>
+    </nav>
+    <button class="menu-btn" type="button" id="menuBtn" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
+      <svg class="bars" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <nav class="menu" id="menu" data-open="false" aria-label="Page sections">
+    <a href="#calc">Profit check<small>Run your numbers</small></a>
+    <a href="#features">What it does<small>The sheet map</small></a>
+    <a href="#start">First ten minutes<small>Setup walkthrough</small></a>
+    <a href="#tour">Tour<small>Sheets full size, sample PDFs</small></a>
+    <a href="#fit">Fit check<small>Your app and your trade</small></a>
+    <a href="#faq">FAQ</a>
+    <a class="cta" href="#buy">Get the spreadsheet</a>
+  </nav>
+  <div class="menu-backdrop" id="menuBackdrop" data-open="false" aria-hidden="true"></div>
+</header>
+
+<main id="main">
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Excel + Google Sheets · 24 connected sheets</span>
+        <h1>Know the real profit on <em>every</em> job, from the first quote to the last payment.</h1>
+        <p class="lead">Estimate it, send a client-ready proposal, schedule it on a Gantt chart, track crew hours and every cost, handle change orders with a signable form, invoice and collect, and watch budget vs actual on a dashboard. No subscription, no add-ins, no macros.</p>
+        <div class="cta">
+          <a class="btn btn-primary" data-link="etsy" href="#buy">Get the spreadsheet</a>
+          <a class="btn btn-ghost" href="#calc">Check a job's margin first</a>
+        </div>
+        <div class="price-line"><b data-price>$29</b><span>one-time · instant download · sample + blank workbook + PDF guide</span></div>
+        <div class="proof">
+          <div><b>24</b>connected sheets</div>
+          <div><b class="num">893</b>formula checks in Excel</div>
+          <div><b class="num">46</b>bad-data probes of the Health Check</div>
+          <div><b>0</b>macros or add-ins</div>
+        </div>
+      </div>
+      <figure class="hero-shot"><img src="assets/hero-dashboard.jpg" srcset="assets/hero-dashboard-700.jpg 700w, assets/hero-dashboard.jpg 1400w" sizes="(max-width: 900px) 92vw, 540px" width="1400" height="699" alt="Dashboard with 16 KPIs, alerts and charts" fetchpriority="high"></figure>
+    </div>
+  </section>
+
+  <section class="calc" id="calc">
+    <div class="wrap">
+      <p class="kicker">Profit check</p>
+      <p class="calc-print-head">Job profit check<small id="calcPrintMeta"></small></p>
+      <h2 class="reveal">See what one bad cost code does to a job.</h2>
+      <p class="sub reveal">This is the same math the workbook runs on every job: cost × markup, contingency, overhead share, and the margin that survives an overrun. Type your own numbers; nothing is stored or sent anywhere.</p>
+      <div class="calc-grid">
+        <form class="panel reveal" id="calcForm" novalidate>
+          <h3>Your job</h3>
+          <p class="hint">Example numbers are pre-filled. Replace them with a real quote.</p>
+          <div class="field"><label for="cost">Estimated cost<small>Labor, materials, subs, permits, everything</small></label><div class="inp" data-prefix="$"><input id="cost" type="number" inputmode="decimal" min="0" step="any" value="36860" required></div></div>
+          <div class="field"><label for="markup">Markup on cost<small>Workbook default by category: 15–35 %</small></label><div class="inp" data-suffix="%"><input id="markup" type="number" inputmode="decimal" min="0" max="300" step="any" value="21" required></div></div>
+          <div class="field"><label for="cont">Contingency<small>Added on the proposal subtotal</small></label><div class="inp" data-suffix="%"><input id="cont" type="number" inputmode="decimal" min="0" max="50" step="any" value="5" required></div></div>
+          <div class="field"><label for="oh">Overhead<small>Share of revenue that keeps the lights on</small></label><div class="inp" data-suffix="%"><input id="oh" type="number" inputmode="decimal" min="0" max="80" step="any" value="10" required></div></div>
+          <div class="field"><label for="over">Cost overrun<small>How far actual cost runs past the estimate</small></label><div class="inp" data-suffix="%"><input id="over" type="number" inputmode="decimal" min="-50" max="200" step="any" value="10" required></div></div>
+        </form>
+        <div class="results reveal" aria-live="polite">
+          <div class="tile big"><div class="lbl">Proposal total (cost × markup, plus contingency)</div><div class="val" id="rPrice">—</div></div>
+          <div class="tile"><div class="lbl">Gross profit if cost lands on estimate</div><div class="val" id="rProfit">—</div></div>
+          <div class="tile"><div class="lbl">Gross margin</div><div class="val" id="rMargin">—</div></div>
+          <div class="tile" id="tNet"><div class="lbl">Net margin after overhead</div><div class="val" id="rNet">—</div></div>
+          <div class="tile" id="tOver"><div class="lbl">Net profit after a <span id="rOverPct">10 %</span> overrun</div><div class="val" id="rOverProfit">—</div></div>
+          <div class="bar"><div class="lbl"><span>Where each dollar of the proposal goes</span><span id="rBreak"></span></div><div class="track"><div class="seg cost" id="segCost"></div><div class="seg oh" id="segOh"></div><div class="seg profit" id="segProfit"></div></div><div class="legend"><span><i style="background:#6f7f75"></i>Job cost</span><span><i style="background:#c4ccc6"></i>Overhead</span><span><i style="background:#2a7f8e"></i>Profit</span></div></div>
+          <p class="insight" id="rInsight"></p>
+          <div class="share" style="grid-column:1/-1;display:flex;justify-content:flex-end;gap:10px;align-items:center;flex-wrap:wrap"><span style="font-size:13px;color:var(--muted)">The numbers live in the address bar, so a link reopens this exact check.</span><button class="btn btn-soft" type="button" id="printCalc" style="padding:10px 16px;font-size:14px">Print this check</button><button class="btn btn-soft" type="button" id="shareCalc" style="padding:10px 16px;font-size:14px">Copy link to this check</button></div>
+        </div>
+      </div>
+      <p class="calc-foot">The workbook applies markup per category (labor, material, subcontractor, equipment, permit, other), then contingency and tax on the proposal, and tracks the actual overrun per cost code on the Job Profit Report. This check uses one blended markup.</p>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="wrap">
+      <p class="kicker">What it does</p>
+      <h2 class="reveal">One workbook. The whole job.</h2>
+      <p class="sub reveal">Every sheet feeds the next. Light-blue cells are inputs; everything else is calculated and checked. Pick a sheet to see what it depends on and what depends on it.</p>
+      <div class="map reveal" id="map" aria-label="Map of the 24 sheets and how they connect">
+        <h3 class="print-only">PricingHub sheet map</h3>
+        <p class="print-sub">24 connected sheets. Amber = sheets that feed the selected one. Teal = sheets that use it.</p>
+        <div>
+          <div class="map-cols" id="mapCols" role="group" aria-label="Sheets by stage. Use the arrow keys to move, Enter to select."></div>
+          <div class="map-key"><span><i class="k1"></i>Selected sheet</span><span><i class="k2"></i>Feeds the selected sheet</span><span><i class="k3"></i>Uses the selected sheet</span>
+            <span class="map-tools"><button type="button" class="btn btn-soft" id="mapClear" style="padding:9px 14px;font-size:14px">Clear</button><button type="button" class="btn btn-soft" id="mapPrint" style="padding:9px 14px;font-size:14px">Print the map</button></span></div>
+        </div>
+        <div class="map-detail" id="mapDetail" aria-live="polite"></div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="start" id="start">
+    <div class="wrap">
+      <p class="kicker">First ten minutes</p>
+      <h2 class="reveal">From download to a printed proposal.</h2>
+      <p class="sub reveal">The Quick-Start Guide in eight steps, each shown on the real sheet from the sample workbook. Use the arrow keys or the buttons to move through them.</p>
+      <div class="steps reveal">
+        <ol class="step-list" id="stepList" aria-label="Setup steps"></ol>
+        <div class="stage-card">
+          <div class="stage-img"><img id="stageImg" src="assets/steps/settings.jpg" width="1200" height="720" alt=""><span class="tag" id="stageTag"></span></div>
+          <div class="progress" aria-hidden="true"><i id="stageBar"></i></div>
+          <div class="stage-body">
+            <div><h3 id="stageTitle"></h3><p id="stageText"></p></div>
+            <div class="stage-nav"><span class="count" id="stageCount"></span><span class="btns"><button class="ibtn" type="button" id="stepPrev" aria-label="Previous step">←</button><button class="ibtn" type="button" id="stepNext" aria-label="Next step">→</button></span></div>
+          </div>
+        </div>
+      </div>
+      <p class="after">After that, the Dashboard, Job Profit Report, Reports, Tax Summary and Health Check keep themselves up to date. Nothing else to configure.</p>
+    </div>
+  </section>
+
+  <section class="tour" id="tour">
+    <div class="wrap">
+      <p class="kicker">Tour</p>
+      <h2 class="reveal">Six sheets, rendered from the sample workbook.</h2>
+      <p class="sub reveal">Six of the 24 sheets, from the sample file's three worked jobs for a fictional remodeler. Open any image full size; use the arrow keys to move between them. The walkthrough above covers the rest.</p>
+      <p class="swipe-hint" aria-hidden="true">Swipe sideways for the next sheet →</p>
+      <div class="gallery" id="gallery">
+        <button class="shot reveal" type="button" data-i="0"><img loading="lazy" decoding="async" width="1400" height="1400" src="assets/02-schedule.jpg" srcset="assets/02-schedule-700.jpg 700w, assets/02-schedule.jpg 1400w" sizes="(max-width: 760px) 84vw, 360px" alt="Gantt schedule, daily log and mileage"><span class="cap"><span><b>Schedule, daily log, mileage</b>Gantt bars, weather and work-done log, miles at your rate.</span><span class="zoom" aria-hidden="true">⤢</span></span></button>
+        <button class="shot reveal" type="button" data-i="1"><img loading="lazy" decoding="async" width="1400" height="1400" src="assets/03-estimate.jpg" srcset="assets/03-estimate-700.jpg 700w, assets/03-estimate.jpg 1400w" sizes="(max-width: 760px) 84vw, 360px" alt="Estimate and cost library"><span class="cap"><span><b>Estimate &amp; price book</b>Markup by category, proposal line numbers, library lookups.</span><span class="zoom" aria-hidden="true">⤢</span></span></button>
+        <button class="shot reveal" type="button" data-i="2"><img loading="lazy" decoding="async" width="1400" height="1400" src="assets/04-proposal.jpg" srcset="assets/04-proposal-700.jpg 700w, assets/04-proposal.jpg 1400w" sizes="(max-width: 760px) 84vw, 360px" alt="Client-ready proposal"><span class="cap"><span><b>Proposal</b>Scope summary, contingency, tax, deposit schedule, detailed lines.</span><span class="zoom" aria-hidden="true">⤢</span></span></button>
+        <button class="shot reveal" type="button" data-i="3"><img loading="lazy" decoding="async" width="1400" height="1400" src="assets/05-job-profit-report.jpg" srcset="assets/05-job-profit-report-700.jpg 700w, assets/05-job-profit-report.jpg 1400w" sizes="(max-width: 760px) 84vw, 360px" alt="Job profit report"><span class="cap"><span><b>Job Profit Report</b>Budget vs actual per category and cost code.</span><span class="zoom" aria-hidden="true">⤢</span></span></button>
+        <button class="shot reveal" type="button" data-i="4"><img loading="lazy" decoding="async" width="1400" height="1400" src="assets/07-change-orders.jpg" srcset="assets/07-change-orders-700.jpg 700w, assets/07-change-orders.jpg 1400w" sizes="(max-width: 760px) 84vw, 360px" alt="Change orders and CO form"><span class="cap"><span><b>Change orders</b>Log, approve, print the signature-ready form.</span><span class="zoom" aria-hidden="true">⤢</span></span></button>
+        <button class="shot reveal" type="button" data-i="5"><img loading="lazy" decoding="async" width="1400" height="1400" src="assets/08-invoices-reports.jpg" srcset="assets/08-invoices-reports-700.jpg 700w, assets/08-invoices-reports.jpg 1400w" sizes="(max-width: 760px) 84vw, 360px" alt="Invoice, statement, reports and payments"><span class="cap"><span><b>Invoices, statements, reports</b>Printable invoice, client statement, aging and cash forecast.</span><span class="zoom" aria-hidden="true">⤢</span></span></button>
+      </div>
+      <p class="kicker" style="margin-top:44px">The documents your clients receive</p>
+      <h3 style="margin:0 0 6px;font-size:22px;font-weight:600;color:var(--ink)">Printed straight from the sample workbook.</h3>
+      <p class="sub" style="margin-bottom:0">Four PDFs, exactly as Excel saves them, for the fictional Northline Remodeling job. The picker and internal columns never print.</p>
+      <div class="docs reveal">
+        <a class="doc" href="assets/samples/proposal.pdf" target="_blank" rel="noopener"><span class="ico" aria-hidden="true"></span><span><b>Proposal</b><small>Scope, payment schedule, 16 lines, terms, signatures</small></span></a>
+        <a class="doc" href="assets/samples/invoice-print.pdf" target="_blank" rel="noopener"><span class="ico" aria-hidden="true"></span><span><b>Invoice</b><small>Balance due, contract summary, remittance slip</small></span></a>
+        <a class="doc" href="assets/samples/co-form.pdf" target="_blank" rel="noopener"><span class="ico" aria-hidden="true"></span><span><b>Change order</b><small>Revised total and completion date, signature lines</small></span></a>
+        <a class="doc" href="assets/samples/client-statement.pdf" target="_blank" rel="noopener"><span class="ico" aria-hidden="true"></span><span><b>Client statement</b><small>Every invoice, balances, aging, payment instructions</small></span></a>
+      </div>
+    </div>
+    <dialog class="lb" id="lb" aria-label="Sheet preview">
+      <div class="lb-box">
+        <div class="lb-head"><b id="lbTitle"></b><span id="lbCount"></span><button class="ibtn" type="button" id="lbClose" aria-label="Close preview">✕</button></div>
+        <div class="lb-body"><img id="lbImg" src="" alt=""></div>
+        <div class="lb-foot"><p id="lbCap"></p><div class="lb-nav"><button class="ibtn" type="button" id="lbPrev" aria-label="Previous sheet">←</button><button class="ibtn" type="button" id="lbNext" aria-label="Next sheet">→</button></div></div>
+      </div>
+    </dialog>
+  </section>
+
+  <section id="fit">
+    <div class="wrap">
+      <p class="kicker">Will it run on what I have?</p>
+      <h2 class="reveal">Pick your spreadsheet app.</h2>
+      <p class="sub reveal">Honest answers per platform. The workbook uses plain formulas only, so nothing needs installing.</p>
+      <div class="seg reveal" role="group" aria-label="Spreadsheet application" id="fitSeg">
+        <button type="button" data-fit="365" aria-pressed="true">Microsoft 365</button>
+        <button type="button" data-fit="2016" aria-pressed="false">Excel 2016–2021</button>
+        <button type="button" data-fit="mac" aria-pressed="false">Excel for Mac</button>
+        <button type="button" data-fit="web" aria-pressed="false">Excel for iPad / web</button>
+        <button type="button" data-fit="sheets" aria-pressed="false">Google Sheets</button>
+      </div>
+      <div class="fit reveal" id="fitPanel" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section id="trade" style="padding-top:0">
+    <div class="wrap">
+      <p class="kicker">Will it fit my trade?</p>
+      <h2 class="reveal">Pick your trade. See the 24 cost codes it needs.</h2>
+      <p class="sub reveal">The workbook ships with 24 editable cost codes tuned for remodeling. Every code is a light-blue cell on the Settings sheet, so renaming is typing. These are suggested names for other trades, not extra features; the math is the same.</p>
+      <div class="seg reveal" role="group" aria-label="Trade" id="tradeSeg"></div>
+      <div class="trade reveal">
+        <div class="trade-head"><div><h3 id="tradeTitle"></h3><p id="tradeNote"></p></div><span class="cat" id="tradeCount" style="font:500 12px var(--font-num);color:var(--teal-ink);background:var(--pale);padding:6px 11px;border-radius:999px"></span></div>
+        <div class="codes" id="codeList" aria-live="polite"></div>
+        <div class="trade-foot"><span>Struck-through names are the defaults; bold names are the suggested rename. Categories (which set the default markup) stay as they are.</span><span class="copy"><button class="btn btn-soft" type="button" id="copyCodes" style="padding:10px 16px;font-size:14px">Copy this list</button></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="included" class="tour" style="border-bottom:0">
+    <div class="wrap two">
+      <div>
+        <p class="kicker">Included</p>
+        <h2 class="reveal">What you get</h2>
+        <p class="sub reveal">Instant download after purchase. Open the sample first, then start the blank file with the ten-minute guide.</p>
+        <ul class="checks reveal">
+          <li><b>SAMPLE workbook (.xlsx)</b> — three worked jobs, crew, vendors, schedule, invoices.</li>
+          <li><b>BLANK workbook (.xlsx)</b> — ready for your business, with 24 editable cost codes.</li>
+          <li><b>Quick-Start Guide (PDF)</b> — ten-minute setup, sheet-by-sheet walkthrough, FAQ.</li>
+          <li><b>Verified</b> — 893 automated formula checks plus 46 bad-data probes of the built-in Health Check.</li>
+          <li><b>Yours</b> — one-time purchase for your own business, on any number of your devices.</li>
+          <li><b>Version 1.0 (September 2026)</b> — updates are added to the same listing; re-download from your Etsy purchases page.</li>
+        </ul>
+        <p class="reveal" style="margin:22px 0 0"><a class="btn btn-soft" href="assets/quick-start-guide.pdf" target="_blank" rel="noopener" style="padding:12px 18px;font-size:15px">Read the guide before you buy <span style="font-weight:500;color:var(--muted)">· PDF, 4 pages</span></a></p>
+      </div>
+      <div>
+        <p class="kicker">Capacity</p>
+        <h2 class="reveal">Sized for a real small contractor.</h2>
+        <p class="sub reveal">Insert rows above the totals when you need more.</p>
+        <div class="stat reveal">
+          <div><b>40</b><span>jobs</span></div><div><b>400</b><span>estimate lines</span></div><div><b>1,000</b><span>timesheet rows</span></div>
+          <div><b>1,000</b><span>cost entries</span></div><div><b>200</b><span>invoices</span></div><div><b>300</b><span>payments</span></div>
+          <div><b>200</b><span>schedule tasks</span></div><div><b>100</b><span>change orders</span></div><div><b>100</b><span>clients · vendors</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <p class="kicker">Questions</p>
+      <h2 class="reveal">Short answers.</h2>
+      <p class="sub reveal">Message through the shop for anything else; problems are fixed within a business day.</p>
+      <details open><summary>Does it work in Google Sheets?</summary><p>Yes. Upload the .xlsx to Drive, open it, then File → Save as Google Sheets. Formulas, dropdowns, conditional formatting and the Gantt carry over; the three bar charts may need a one-time reformat.</p></details>
+      <details><summary>Any macros, add-ins or subscription?</summary><p>None. Plain formulas you can audit. One-time purchase.</p></details>
+      <details><summary>Can I rename cost codes and add crew?</summary><p>Yes. 24 editable codes, 30 crew rows, 100 vendors, and your own price book.</p></details>
+      <details><summary>Can I protect the formulas?</summary><p>Yes. Inputs are pre-unlocked, so Review → Protect Sheet locks everything else in one step.</p></details>
+      <details><summary>Is it accounting or tax software?</summary><p>No. It is an organizing and estimating tool. The 1099 list and tax summary are informational; confirm with your tax professional.</p></details>
+      <details><summary>Refunds?</summary><p>Instant downloads cannot be returned on Etsy, but if something does not work as described, message the shop with the sheet and cell and it will be fixed or made right.</p></details>
+    </div>
+  </section>
+
+  <section id="buy" class="band">
+    <div class="wrap">
+      <h2 class="reveal">Start pricing jobs you can actually profit on.</h2>
+      <p class="sub reveal">One-time purchase. Instant download: three files, about 0.9 MB in total. No installer, no account.</p>
+      <div class="cta" style="justify-content:center">
+        <a class="btn btn-primary" data-link="etsy" href="#">Buy on Etsy · <span data-price>$29</span></a>
+        <a class="btn btn-ghost" data-link="payhip" href="#">Buy with PayPal</a>
+      </div>
+      <p class="note" id="buyNote"></p>
+      <p class="note">Created with AI assistance and verified in Microsoft Excel. For use in your own business; please do not resell the template.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span data-year></span> PricingHub</span>
+    <span>Not accounting, tax, legal or financial advice.</span>
+    <span class="footer-labs">An independent product by <a href="https://johnjayasankar.com">John Jayasankar</a>, part of <a href="https://labs.johnjayasankar.com">Labs</a>.</span>
+  </div>
+</footer>
+
+<div class="stick" id="stick" aria-hidden="true">
+  <div><span class="p" data-price>$29</span><small>one-time · instant download</small></div>
+  <a class="btn btn-primary" data-link="etsy" href="#buy">Get the spreadsheet</a>
+</div>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  // ---- Links & price come from links.json (edit that one file on GitHub to activate the buy buttons); these inline values are the fallback.
+  const LINKS = { etsy: "", payhip: "", price: "$29" };
+  document.querySelector("[data-year]").textContent = new Date().getFullYear();
+  function applyLinks(cfg) {
+    const price = cfg.price || LINKS.price; document.querySelectorAll("[data-price]").forEach(el => el.textContent = price);
+    document.querySelectorAll("[data-link]").forEach(a => {
+      const url = cfg[a.dataset.link];
+      if (url && /^https:\/\//.test(url)) { a.hidden = false; a.removeAttribute("aria-disabled"); a.href = url; a.target = "_blank"; a.rel = "noopener"; a.textContent = a.dataset.link === "payhip" ? "Buy with PayPal" : (a.closest("#buy") ? `Buy on Etsy · ${price}` : "Get the spreadsheet"); const n = $("buyNote"); if (n && a.dataset.link === "etsy") n.textContent = ""; }
+      else if (a.getAttribute("href") === "#") {
+        if (a.dataset.link === "payhip") { a.hidden = true; return; }   // no second store yet: one honest button beats two dead ones
+        a.setAttribute("aria-disabled", "true"); a.textContent = "Coming soon on Etsy"; a.addEventListener("click", e => { if (a.getAttribute("aria-disabled") === "true") e.preventDefault(); });
+        const n = $("buyNote"); if (n) n.textContent = "The listing is being set up. Bookmark this page; the button activates the moment it opens.";
+      }
+    });
+  }
+  applyLinks(LINKS);
+  function applyOffer(cfg) {   // structured-data offer only once a real shop link exists; price parsed from the display string
+    const ld = $("productLd"); if (!ld || !cfg.etsy || !/^https:\/\//.test(cfg.etsy)) return;
+    try { const data = JSON.parse(ld.textContent); const amount = parseFloat(String(cfg.price || LINKS.price).replace(/[^0-9.]/g, "")); if (!amount) return;
+      data.offers = { "@type": "Offer", url: cfg.etsy, price: amount.toFixed(2), priceCurrency: "USD", availability: "https://schema.org/InStock", itemCondition: "https://schema.org/NewCondition" }; ld.textContent = JSON.stringify(data); } catch {}
+  }
+  fetch("links.json", { cache: "no-store" }).then(r => r.ok ? r.json() : null).then(cfg => { if (cfg && typeof cfg === "object") { const merged = { ...LINKS, ...cfg }; applyLinks(merged); applyOffer(merged); } }).catch(() => {});
+
+
+  // ---- Mobile menu (disclosure): Escape closes, backdrop closes, a link closes, focus returns to the button
+  const menuBtn = $("menuBtn"), menu = $("menu"), backdrop = $("menuBackdrop");
+  function setMenu(open) { menuBtn.setAttribute("aria-expanded", String(open)); menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu"); menu.dataset.open = String(open); backdrop.dataset.open = String(open); document.body.style.overflow = open ? "hidden" : ""; if (open) menu.querySelector("a").focus(); else menuBtn.focus({ preventScroll: true }); }
+  menuBtn.addEventListener("click", () => setMenu(menu.dataset.open !== "true"));
+  backdrop.addEventListener("click", () => setMenu(false));
+  menu.addEventListener("click", e => { if (e.target.closest("a")) { document.body.style.overflow = ""; menu.dataset.open = "false"; backdrop.dataset.open = "false"; menuBtn.setAttribute("aria-expanded", "false"); } });
+  document.addEventListener("keydown", e => {
+    if (menu.dataset.open !== "true") return;
+    if (e.key === "Escape") { setMenu(false); return; }
+    if (e.key === "Tab") { const items = [menuBtn, ...menu.querySelectorAll("a")]; const i = items.indexOf(document.activeElement); if (e.shiftKey && (i <= 0)) { e.preventDefault(); items[items.length - 1].focus(); } else if (!e.shiftKey && i === items.length - 1) { e.preventDefault(); items[0].focus(); } }
+  });
+  matchMedia("(min-width: 901px)").addEventListener("change", e => { if (e.matches && menu.dataset.open === "true") setMenu(false); });
+
+  // ---- Reveal on scroll (no-op under reduced motion; everything is visible by default there)
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reveals = document.querySelectorAll(".reveal");
+  if (reduce || !("IntersectionObserver" in window)) reveals.forEach(el => el.classList.add("in"));
+  else { const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" }); reveals.forEach(el => io.observe(el));
+         setTimeout(() => reveals.forEach(el => el.classList.add("in")), 2500); }   // safety net: nothing stays invisible if the observer never fires
+
+  // ---- Profit check (same arithmetic as the workbook: price = cost × (1 + markup); contingency on the subtotal; overhead as a share of revenue)
+  const money = n => (n < 0 ? "−" : "") + "$" + Math.abs(Math.round(n)).toLocaleString("en-US");
+  const pct = n => (Math.round(n * 10) / 10).toLocaleString("en-US", { maximumFractionDigits: 1 }) + " %";
+  const num = id => { const v = parseFloat($(id).value); return Number.isFinite(v) ? v : 0; };
+  function calc() {
+    const cost = Math.max(0, num("cost")), mk = num("markup") / 100, ct = num("cont") / 100, oh = num("oh") / 100, ov = num("over") / 100;
+    const subtotal = cost * (1 + mk), price = subtotal * (1 + ct);
+    const profit = price - cost, margin = price ? profit / price : 0;
+    const overhead = price * oh, net = price - cost - overhead, netM = price ? net / price : 0;
+    const actual = cost * (1 + ov), netAfter = price - actual - overhead;
+    const breakeven = cost ? (price * (1 - oh)) / cost - 1 : 0;   // overrun at which net profit hits zero
+    $("rPrice").textContent = money(price); $("rProfit").textContent = money(profit); $("rMargin").textContent = pct(margin * 100);
+    $("rNet").textContent = pct(netM * 100); $("rOverPct").textContent = pct(ov * 100); $("rOverProfit").textContent = money(netAfter);
+    $("tNet").className = "tile " + (netM < 0 ? "bad" : netM < 0.08 ? "warn" : "good");
+    $("tOver").className = "tile " + (netAfter < 0 ? "bad" : netAfter < net * 0.5 ? "warn" : "good");
+    const cs = price ? Math.min(100, cost / price * 100) : 0, os = price ? Math.min(100 - cs, overhead / price * 100) : 0, ps = Math.max(0, 100 - cs - os);
+    $("segCost").style.width = cs + "%"; $("segOh").style.width = os + "%"; $("segProfit").style.width = ps + "%";
+    $("rBreak").textContent = price ? "Break-even overrun: " + pct(breakeven * 100) : "";
+    let msg;
+    if (!price) msg = "Enter an estimated cost to see the proposal total and margin.";
+    else if (netAfter < 0) msg = `At a <b>${pct(ov * 100)}</b> overrun this job <b>loses ${money(-netAfter)}</b> after overhead. The Job Profit Report flags the cost code that caused it while there is still time to write a change order.`;
+    else msg = `A <b>${pct(ov * 100)}</b> overrun keeps <b>${money(netAfter)}</b> of the <b>${money(net)}</b> net profit you priced in. Costs can run <b>${pct(breakeven * 100)}</b> over the estimate before this job stops paying for itself.`;
+    $("rInsight").innerHTML = msg;
+  }
+  $("calcForm").addEventListener("input", calc); $("calcForm").addEventListener("submit", e => e.preventDefault()); calc();
+
+
+  // ---- First ten minutes: the Quick-Start Guide as a stepper, each step on a real sheet render
+  const STEPS = [
+    ["Settings", "Type your company details and markups", "Company name, address, license, default markup per category, contingency, overhead and mileage rate. Rename any of the 24 cost codes to match your trade.", "settings"],
+    ["Vendors & Crew", "Add your crew and subs", "Workers with cost and bill rates feed the Timesheet. Subs and suppliers feed Job Costs, the insurance alerts and the 1099 list.", "crew"],
+    ["Jobs", "Open a job", "One row: client, address, status and target dates. The sheet suggests the next Job ID for you.", "jobs"],
+    ["Estimate", "Price it line by line", "Pick a cost code, quantity and unit cost, or pull an item from your price book. Markup applies by category; override any line.", "estimate"],
+    ["Proposal", "Print the proposal", "Pick the Job ID and the scope summary, payment schedule, detailed lines, terms and signature lines fill in. Save as PDF and send.", "proposal"],
+    ["Timesheet · Job Costs", "Log the work as it happens", "Crew hours on the Timesheet, everything else on Job Costs. Mileage, Daily Log and Change Orders when you need them.", "timesheet"],
+    ["Invoices · Payments", "Invoice and collect", "Add an invoice row, print it from Invoice Print, record the payment. Balances, overdue status and aging update on their own.", "invoices"],
+    ["Dashboard", "Read the numbers", "Budget vs actual per job, alerts, cash forecast, tax summary. All calculated, nothing to configure.", "dashboard"]
+  ];
+  const list = $("stepList"); let step = 0;
+  STEPS.forEach((st, i) => { const li = document.createElement("li"); li.innerHTML = `<button class="step" type="button" data-i="${i}"><span class="n">${i + 1}</span><span><b>${st[1]}</b><small>${st[0]}</small></span></button>`; list.appendChild(li); });
+  const stepBtns = [...list.querySelectorAll(".step")], stImg = $("stageImg");
+  function go(i, focusBtn) {
+    step = (i + STEPS.length) % STEPS.length; const [sheet, title, text, key] = STEPS[step];
+    stepBtns.forEach((b, k) => { if (k === step) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current"); });
+    const swap = () => { stImg.src = `assets/steps/${key}.jpg`; stImg.alt = `${sheet} sheet from the sample workbook`; stImg.onload = stImg.onerror = () => stImg.classList.remove("out"); };
+    if (reduce) swap(); else { stImg.classList.add("out"); setTimeout(swap, 120); }
+    $("stageTag").textContent = sheet; $("stageTitle").textContent = title; $("stageText").textContent = text; $("stageCount").textContent = `Step ${step + 1} of ${STEPS.length}`; $("stageBar").style.width = ((step + 1) / STEPS.length * 100) + "%";
+    new Image().src = `assets/steps/${STEPS[(step + 1) % STEPS.length][3]}.jpg`;
+    if (focusBtn) stepBtns[step].focus();
+    if (window.innerWidth <= 900) stepBtns[step].scrollIntoView({ block: "nearest", inline: "center", behavior: reduce ? "auto" : "smooth" });
+  }
+  stepBtns.forEach((b, i) => { b.addEventListener("click", () => go(i)); b.addEventListener("keydown", e => { const d = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key]; if (d) { e.preventDefault(); go(i + d, true); } }); });
+  $("stepPrev").addEventListener("click", () => go(step - 1)); $("stepNext").addEventListener("click", () => go(step + 1));
+  go(0);
+
+  // ---- Sheet preview (dialog with keyboard navigation)
+  const shots = [...document.querySelectorAll("#gallery .shot")];
+  const lb = $("lb"), img = $("lbImg"); let cur = 0;
+  function show(i) {
+    cur = (i + shots.length) % shots.length; const s = shots[cur], im = s.querySelector("img"), cap = s.querySelector(".cap");
+    img.src = im.getAttribute("src"); img.alt = im.alt; $("lbTitle").textContent = cap.querySelector("b").textContent;
+    $("lbCap").textContent = cap.querySelector("span").childNodes[1] ? cap.querySelector("span").childNodes[1].textContent : ""; $("lbCount").textContent = `${cur + 1} of ${shots.length}`;
+    if (shots[(cur + 1) % shots.length]) new Image().src = shots[(cur + 1) % shots.length].querySelector("img").getAttribute("src");
+  }
+  shots.forEach((s, i) => s.addEventListener("click", () => { if (typeof lb.showModal !== "function") { window.open(s.querySelector("img").getAttribute("src"), "_blank", "noopener"); return; } show(i); lb.showModal(); $("lbNext").focus(); }));
+  $("lbPrev").addEventListener("click", () => show(cur - 1)); $("lbNext").addEventListener("click", () => show(cur + 1)); $("lbClose").addEventListener("click", () => lb.close());
+  lb.addEventListener("keydown", e => { if (e.key === "ArrowRight") show(cur + 1); if (e.key === "ArrowLeft") show(cur - 1); });
+  lb.addEventListener("click", e => { if (e.target === lb) lb.close(); });
+  lb.addEventListener("close", () => shots[cur].focus());
+
+
+  // ---- Sheet map: every sheet, what feeds it and what it feeds (taken from the workbook's formula references)
+  const STAGES = [["setup", "Setup", "#6f7f75"], ["input", "Inputs", "#1c3326"], ["doc", "Documents", "#2a7f8e"], ["report", "Reports", "#1f6b4a"]];
+  const SHEETS = {
+    "Settings": ["setup", "Company details, markups by category, contingency, tax, deposit and progress %, mileage rate, labor burden, overhead, cost codes, document text.", ["CO Form", "Change Orders", "Client Statement", "Cost Library", "Dashboard", "Estimate", "Invoice Print", "Invoices", "Job Costs", "Job Profit Report", "Mileage", "Proposal", "Reports", "Tax Summary", "Timesheet", "Vendors & Crew"]],
+    "Clients": ["setup", "Client directory with lifetime value and balance due.", ["CO Form", "Client Statement", "Health Check", "Invoice Print", "Jobs", "Proposal"]],
+    "Vendors & Crew": ["setup", "Crew cost and bill rates; vendors with insurance expiry, W-9 and 1099 flags, paid year-to-date, unpaid balance.", ["Dashboard", "Health Check", "Tax Summary", "Timesheet"]],
+    "Cost Library": ["setup", "Your price book: items with unit and unit cost that fill into estimates.", ["Estimate", "Health Check"]],
+    "Jobs": ["input", "One row per job: client, status, dates, contract value. Everything rolls up here.", ["CO Form", "Change Orders", "Clients", "Daily Log", "Dashboard", "Estimate", "Health Check", "Invoice Print", "Invoices", "Job Costs", "Job Profit Report", "Mileage", "Payments", "Proposal", "Reports", "Schedule", "Timesheet"]],
+    "Estimate": ["input", "Line-by-line quote with automatic category markup, library lookups and proposal line numbers.", ["Cost Library", "Health Check", "Job Profit Report", "Jobs", "Proposal", "Reports"]],
+    "Schedule": ["input", "Tasks with workday end dates, status and a 12-week Gantt chart.", ["Dashboard", "Health Check", "Job Profit Report"]],
+    "Timesheet": ["input", "Crew hours by day and job with rates, labor burden, billable value and a weekly payroll summary.", ["Daily Log", "Dashboard", "Health Check", "Job Profit Report", "Jobs", "Reports", "Tax Summary", "Vendors & Crew"]],
+    "Job Costs": ["input", "Materials, subs, equipment, permits and other actual costs, paid or unpaid.", ["Dashboard", "Health Check", "Job Profit Report", "Jobs", "Reports", "Tax Summary", "Vendors & Crew"]],
+    "Mileage": ["input", "Job-related driving at your mileage rate, counted into job cost.", ["Dashboard", "Health Check", "Job Profit Report", "Jobs", "Reports", "Tax Summary"]],
+    "Daily Log": ["input", "Weather, crew, work performed, issues, inspections: your dispute record.", ["Health Check", "Job Profit Report"]],
+    "Change Orders": ["input", "Added work; approved change orders raise the contract and the budget.", ["CO Form", "Health Check", "Job Profit Report", "Jobs"]],
+    "Invoices": ["input", "Invoices with balances, status, days overdue and aging bucket.", ["Client Statement", "Dashboard", "Health Check", "Invoice Print", "Jobs", "Payments", "Reports", "Tax Summary"]],
+    "Payments": ["input", "Money received, linked to invoices and jobs.", ["Dashboard", "Health Check", "Invoices", "Jobs", "Tax Summary"]],
+    "Proposal": ["doc", "Client-ready proposal: scope, payment schedule, detailed lines, terms, signatures.", ["Estimate", "Health Check"]],
+    "CO Form": ["doc", "Signature-ready change order with the revised contract total and completion date.", ["Health Check"]],
+    "Invoice Print": ["doc", "Printable invoice with contract summary and a tear-off remittance slip.", ["Health Check"]],
+    "Client Statement": ["doc", "All of a client's invoices, balances and aging on one page.", ["Health Check", "Invoices"]],
+    "Job Profit Report": ["report", "Budget vs actual by category and cost code for one job, with OVER / Watch / On track flags.", ["Health Check"]],
+    "Reports": ["report", "Receivables aging, cash forecast, pipeline, win rate, cost-code performance.", ["Health Check"]],
+    "Tax Summary": ["report", "Year-end totals by category, quarterly table, mileage, 1099 review list.", ["Health Check"]],
+    "Dashboard": ["report", "16 KPIs, alerts, charts, per-job table, monthly P&L.", ["Health Check"]],
+    "Health Check": ["report", "Counts data problems and formula errors from every sheet's Check column.", ["Dashboard"]]
+  };
+  const fedBy = n => Object.keys(SHEETS).filter(k => SHEETS[k][2].includes(n));
+  const cols = $("mapCols"), detail = $("mapDetail"), map = $("map"); let sel = null;
+  STAGES.forEach(([key, label, color]) => {
+    const col = document.createElement("div"); col.className = "map-col"; col.innerHTML = `<h4><i style="background:${color}"></i>${label}</h4>`;
+    Object.keys(SHEETS).filter(k => SHEETS[k][0] === key).forEach(name => { const b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.textContent = name; b.dataset.name = name; b.setAttribute("aria-pressed", "false"); col.appendChild(b); });
+    cols.appendChild(col);
+  });
+  const chips = [...cols.querySelectorAll(".chip")];
+  function select(name) {
+    sel = name; map.classList.toggle("has-sel", !!name);
+    chips.forEach(c => { c.setAttribute("aria-pressed", String(c.dataset.name === name)); c.classList.toggle("feeds", !!name && SHEETS[name][2].includes(c.dataset.name)); c.classList.toggle("fed", !!name && fedBy(name).includes(c.dataset.name)); });
+    if (!name) { detail.innerHTML = `<div class="stage">How it connects</div><h3>Pick any sheet.</h3><p>Amber shows the sheets that feed it; teal shows the sheets that use it. Every link is a real formula reference read from the workbook, so a change in one place flows everywhere it matters.</p><p>Setup sheets are entered once. Input sheets are used as work happens. Documents print for clients. Reports calculate themselves.</p>`; return; }
+    const [stage, desc, feeds] = SHEETS[name]; const label = STAGES.find(s => s[0] === stage)[1]; const inn = fedBy(name);
+    detail.innerHTML = `<div class="stage">${label}</div><h3>${name}</h3><p>${desc}</p><div class="rel"><div class="in"><b>Fed by</b>${inn.length ? inn.map(x => `<span>${x}</span>`).join("") : "<span>Your typing</span>"}</div><div class="out"><b>Used by</b>${feeds.length ? feeds.map(x => `<span>${x}</span>`).join("") : "<span>Print or save as PDF</span>"}</div></div>`;
+  }
+  chips.forEach((c, i) => {
+    c.addEventListener("click", () => select(sel === c.dataset.name ? null : c.dataset.name));
+    c.addEventListener("keydown", e => { const k = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key]; if (k) { e.preventDefault(); chips[(i + k + chips.length) % chips.length].focus(); } if (e.key === "Home") { e.preventDefault(); chips[0].focus(); } if (e.key === "End") { e.preventDefault(); chips[chips.length - 1].focus(); } });
+    c.addEventListener("mouseenter", () => { if (!sel) select(c.dataset.name), sel = null, map.classList.add("has-sel"); });
+    c.addEventListener("mouseleave", () => { if (!sel) select(null); });
+  });
+  $("mapClear").addEventListener("click", () => select(null)); $("mapPrint").addEventListener("click", () => { if (!sel) select("Jobs"); document.body.dataset.print = "map"; window.print(); });
+  addEventListener("afterprint", () => { delete document.body.dataset.print; });
+  select(null);
+
+  // ---- Fit check
+  const FIT = {
+    "365": { title: "Microsoft 365 (Windows or Mac)", ok: ["Every formula, dropdown, conditional format and chart works as built", "Print areas, page breaks and the tear-off remittance slip are preset", "Sheet protection works in one step because inputs are pre-unlocked"], note: ["Verified build: Excel 16 on macOS, 893 automated checks"], how: ["Download the three files from Etsy", "Open the SAMPLE workbook and click around", "Start the BLANK workbook with the ten-minute guide"] },
+    "2016": { title: "Excel 2016, 2019 or 2021", ok: ["Uses only functions that exist since Excel 2010: SUMIFS, COUNTIFS, INDEX/MATCH, IFERROR, WORKDAY, EOMONTH, TEXT", "No dynamic arrays, XLOOKUP, LET or macros, so nothing shows #NAME?", "Charts, conditional formatting and data validation all carry"], note: ["Statically audited against the Excel 2016 function list; not run on a 2016 machine in our own tests"], how: ["Download the three files from Etsy", "If Excel opens in Protected View, click Enable Editing", "Start the BLANK workbook with the ten-minute guide"] },
+    "mac": { title: "Excel for Mac", ok: ["This is the build machine: every check ran here", "Print to PDF works for the proposal, invoice, change order and statement", "Cmd+Z undoes any formula you overwrite by accident"], note: [], how: ["Download the three files from Etsy", "Open the SAMPLE workbook and click around", "Start the BLANK workbook with the ten-minute guide"] },
+    "web": { title: "Excel for iPad or Excel for the web", ok: ["Formulas, dropdowns and conditional formatting all calculate", "Fine for entering hours, costs and payments on site"], note: ["Printing the client documents is better from desktop Excel", "Sheet protection is set from desktop Excel, then respected here"], how: ["Save the workbook to OneDrive", "Open it from the Excel app or office.com", "Enter time and costs on site; run reports from desktop"] },
+    "sheets": { title: "Google Sheets", ok: ["Every function used is on the Sheets-supported list; a probe workbook with each construct converted without error", "Dropdowns, conditional formatting, named ranges and the Gantt carry over", "Free, and shareable with a bookkeeper"], note: ["The three dashboard bar charts may need a one-time reformat after import", "Live recalculation in Sheets has not yet been observed in our own tests; if a cell errors, message the shop with the sheet and cell"], how: ["Upload the .xlsx to Google Drive", "Open it, then File → Save as Google Sheets", "Delete the .xlsx copy from Drive to avoid two versions"] }
+  };
+  const panel = $("fitPanel");
+  function renderFit(key) {
+    const f = FIT[key];
+    panel.innerHTML = `<div><h3>${f.title}</h3><ul>${f.ok.map(x => `<li>${x}</li>`).join("")}${f.note.map(x => `<li class="note">${x}</li>`).join("")}</ul></div><div class="how"><b>How to start</b><ol>${f.how.map(x => `<li>${x}</li>`).join("")}</ol></div>`;
+    document.querySelectorAll("#fitSeg button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.fit === key)));
+  }
+  document.querySelectorAll("#fitSeg button").forEach(b => b.addEventListener("click", () => renderFit(b.dataset.fit)));
+  renderFit("365");
+
+
+  // ---- Trade fit: the workbook's 24 default cost codes (from the Settings sheet) with suggested renames per trade
+  const CODES = [["01","General conditions / supervision","Labor"],["02","Demolition & disposal","Labor"],["03","Site work & excavation","Subcontractor"],["04","Concrete & foundation","Subcontractor"],["05","Framing labor","Labor"],["06","Lumber & framing materials","Material"],["07","Roofing","Subcontractor"],["08","Windows & doors","Material"],["09","Exterior finishes / siding","Subcontractor"],["10","Plumbing","Subcontractor"],["11","Electrical","Subcontractor"],["12","HVAC","Subcontractor"],["13","Insulation & drywall","Subcontractor"],["14","Interior finish labor","Labor"],["15","Paint & wall finishes","Material"],["16","Flooring & tile","Material"],["17","Cabinets & countertops","Material"],["18","Fixtures & appliances","Material"],["19","Equipment rental","Equipment"],["20","Permits & inspections","Permit/Fee"],["21","Dumpster & cleanup","Other"],["22","Fuel & mileage","Other"],["23","Warranty / callbacks","Labor"],["24","Miscellaneous","Other"]];
+  const TRADES = {
+    "Remodeler": ["Built for you as shipped. Rename nothing; add library items for the work you repeat.", {}],
+    "Handyman": ["Small jobs across many trades: keep the broad codes, repoint the heavy-construction ones.", {"03":"Fence & gate repair","04":"Deck & porch repair","07":"Gutter & minor roof repair","09":"Siding & trim repair","12":"Appliance install","17":"Shelving & assembly"}],
+    "Painter": ["Prep, coatings and surfaces replace framing and structure.", {"03":"Pressure washing & prep","04":"Surface repair & patching","05":"Prep labor","06":"Primer & sundries","07":"Exterior painting labor","09":"Stain & exterior finishes","10":"Caulk & sealants","11":"Wallpaper removal","12":"Cabinet refinishing","13":"Drywall repair","16":"Floor protection","17":"Cabinet painting","18":"Sprayer & masking supplies"}],
+    "Roofer": ["Tear-off, decking, underlayment and the roof system itself.", {"03":"Tear-off","04":"Decking replacement","05":"Underlayment & flashing labor","06":"Shingles & underlayment","08":"Skylights","09":"Gutters & fascia","10":"Vents & pipe boots","11":"Ridge vent & ventilation","12":"Ice & water shield","13":"Attic insulation","14":"Roof installation labor","15":"Sealants & coatings","16":"Metal roofing","17":"Flat roof / membrane","18":"Chimney & flashing"}],
+    "Electrician": ["Rough-in, devices, panels and specialty installs.", {"03":"Trenching & underground","04":"Service entrance","05":"Rough-in labor","06":"Wire & conduit","07":"Panels & breakers","08":"Devices & switches","09":"Exterior lighting","10":"Lighting fixtures","11":"Finish labor","12":"EV charger / generator","13":"Low-voltage & data","14":"Troubleshooting labor","15":"Smoke & CO detectors","16":"Ceiling fans","17":"Panel upgrades"}],
+    "Plumber": ["Rough-in, fixtures, water heaters, gas and service work.", {"03":"Trenching & sewer","04":"Slab & foundation work","05":"Rough-in labor","06":"Pipe & fittings","07":"Water heaters","08":"Fixtures — bath","09":"Fixtures — kitchen","10":"Drain cleaning","11":"Gas lines","12":"Water treatment","13":"Insulation & access panels","14":"Finish labor","15":"Service calls & repairs","16":"Tile & wall repair","17":"Vanities & cabinets"}],
+    "Landscaper": ["Grading, planting, hardscape, irrigation and maintenance.", {"03":"Grading & excavation","04":"Retaining walls & footings","05":"Install labor","06":"Plants & trees","07":"Irrigation","08":"Fencing & gates","09":"Hardscape / pavers","10":"Drainage","11":"Landscape lighting","12":"Mulch & soil","13":"Sod & seeding","14":"Maintenance labor","15":"Turf & lawn treatments","16":"Stone & gravel","17":"Outdoor structures","18":"Water features"}],
+    "Flooring & tile": ["Prep, underlayment, setting and finishing.", {"03":"Floor prep & leveling","04":"Subfloor repair","05":"Install labor","06":"Underlayment & adhesives","07":"Removal & disposal","08":"Transitions & trim","09":"Baseboards & shoe molding","10":"Waterproofing","11":"Heated floor systems","12":"Grout & sealers","13":"Backer board","14":"Tile setting labor","15":"Stain & finish","17":"Shower & niche work","18":"Thresholds & edging"}]
+  };
+  const tseg = $("tradeSeg"), clist = $("codeList"); let trade = "Remodeler";
+  Object.keys(TRADES).forEach(t => { const b = document.createElement("button"); b.type = "button"; b.textContent = t; b.dataset.trade = t; b.setAttribute("aria-pressed", String(t === trade)); b.addEventListener("click", () => renderTrade(t)); tseg.appendChild(b); });
+  function renderTrade(t) {
+    trade = t; const [note, ren] = TRADES[t]; const n = Object.keys(ren).length;
+    tseg.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.trade === t)));
+    $("tradeTitle").textContent = t === "Remodeler" ? "Remodeler: the defaults" : `${t}: ${n} renames, ${24 - n} as shipped`; $("tradeNote").textContent = note; $("tradeCount").textContent = `${24 - n} keep · ${n} rename`;
+    clist.innerHTML = CODES.map(([id, name, cat]) => ren[id] ? `<div class="code renamed"><span class="id">${id}</span><span class="nm"><s>${name}</s><b>${ren[id]}</b></span><span class="cat">${cat}</span></div>` : `<div class="code"><span class="id">${id}</span><span class="nm">${name}</span><span class="cat">${cat}</span></div>`).join("");
+  }
+  const copyBtn = $("copyCodes");
+  copyBtn.addEventListener("click", async () => {
+    const [, ren] = TRADES[trade]; const text = `Cost codes for a ${trade.toLowerCase()} (PricingHub, Settings sheet)\n` + CODES.map(([id, name, cat]) => `${id}\t${ren[id] || name}\t${cat}`).join("\n");
+    const done = () => { copyBtn.textContent = "Copied"; copyBtn.classList.add("done"); setTimeout(() => { copyBtn.textContent = "Copy this list"; copyBtn.classList.remove("done"); }, 1800); };
+    try { await navigator.clipboard.writeText(text); done(); }
+    catch { const ta = document.createElement("textarea"); ta.value = text; ta.setAttribute("aria-label", "Cost code list"); ta.style.cssText = "position:fixed;left:-9999px"; document.body.appendChild(ta); ta.select(); let ok = false; try { ok = document.execCommand("copy"); } catch {} document.body.removeChild(ta); if (ok) done(); else { copyBtn.textContent = "Copy blocked: select the list instead"; setTimeout(() => copyBtn.textContent = "Copy this list", 2500); } }
+  });
+  renderTrade(trade);
+
+
+  // ---- Shareable state in the URL hash: #calc=cost~markup~cont~oh~over  trade=<name>  step=<n>  sheet=<name>  ("~" needs no escaping)
+  const hashState = () => Object.fromEntries(location.hash.replace(/^#/, "").split("&").filter(Boolean).map(kv => { const [k, ...v] = kv.split("="); return [k, decodeURIComponent(v.join("="))]; }));
+  let urlState = hashState(); let writeTimer = null;
+  function writeState(patch) {
+    if (patch === null) { urlState = {}; } else Object.assign(urlState, patch);
+    clearTimeout(writeTimer); writeTimer = setTimeout(() => { const h = Object.entries(urlState).filter(([, v]) => v !== null && v !== "").map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join("&"); history.replaceState(null, "", h ? "#" + h : location.pathname + location.search); }, 150);
+  }
+  const calcIds = ["cost", "markup", "cont", "oh", "over"];
+  if (urlState.calc) { const v = urlState.calc.split(/[~,]/); calcIds.forEach((id, i) => { if (v[i] !== undefined && v[i] !== "") $(id).value = v[i]; }); calc(); }
+  $("calcForm").addEventListener("input", () => writeState({ calc: calcIds.map(id => $(id).value).join("~") }));
+  $("printCalc").addEventListener("click", () => { $("calcPrintMeta").textContent = `Prepared ${new Date().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })} with the PricingHub profit check. Cost × markup, contingency on the subtotal, overhead as a share of revenue.`; document.body.dataset.print = "calc"; window.print(); });
+  $("shareCalc").addEventListener("click", async () => {
+    writeState({ calc: calcIds.map(id => $(id).value).join("~") }); clearTimeout(writeTimer);
+    const h = Object.entries(urlState).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join("&"); history.replaceState(null, "", "#" + h);
+    const btn = $("shareCalc"), url = location.href; const done = () => { btn.textContent = "Link copied"; btn.classList.add("done"); setTimeout(() => { btn.textContent = "Copy link to this check"; btn.classList.remove("done"); }, 1800); };
+    try { await navigator.clipboard.writeText(url); done(); } catch { btn.textContent = "Copy the address bar"; setTimeout(() => btn.textContent = "Copy link to this check", 2500); }
+  });
+  if (urlState.trade && TRADES[urlState.trade]) renderTrade(urlState.trade);
+  tseg.addEventListener("click", e => { const b = e.target.closest("button"); if (b) writeState({ trade: b.dataset.trade }); });
+  if (urlState.step && +urlState.step >= 1 && +urlState.step <= STEPS.length) go(+urlState.step - 1);
+  const _go = go; go = (i, f) => { _go(i, f); writeState({ step: step + 1 }); };
+  $("stepList").addEventListener("click", e => { if (e.target.closest(".step")) writeState({ step: step + 1 }); });
+  if (urlState.sheet && SHEETS[urlState.sheet]) select(urlState.sheet), sel = urlState.sheet, map.classList.add("has-sel");
+  cols.addEventListener("click", () => writeState({ sheet: sel || null }));
+  const firstKey = Object.keys(urlState)[0]; const target = { calc: "calc", trade: "trade", step: "start", sheet: "map" }[firstKey];
+  if (target) setTimeout(() => document.getElementById(target).scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }), 250);
+
+  // ---- Sticky buy bar on small screens, once the hero has scrolled away
+  const stick = $("stick"), hero = document.querySelector(".hero");
+  if ("IntersectionObserver" in window) new IntersectionObserver(es => es.forEach(e => { stick.classList.toggle("on", !e.isIntersecting); stick.setAttribute("aria-hidden", String(e.isIntersecting)); }), { threshold: 0.05 }).observe(hero);
+})();
+</script>
+</body>
+</html>
