@@ -19,9 +19,11 @@
 <script type="application/ld+json" id="productLd">
 {"@context":"https://schema.org","@type":"Product","name":"PricingHub","description":"Excel and Google Sheets workbook with 24 connected sheets: estimate, proposal, Gantt schedule, timesheets, job costs, change orders, invoices, client statements, budget vs actual, dashboard. Instant download.","image":"assets/og-pricinghub.jpg","category":"Spreadsheet template","isFamilyFriendly":true,"additionalProperty":[{"@type":"PropertyValue","name":"Sheets","value":"24"},{"@type":"PropertyValue","name":"Formats","value":"Excel 2016+, Microsoft 365, Excel for Mac, Google Sheets"}]}
 </script>
-<link rel="preload" as="image" href="assets/hero-dashboard.jpg" imagesrcset="assets/hero-dashboard-700.jpg 700w, assets/hero-dashboard.jpg 1400w" imagesizes="(max-width: 900px) 92vw, 540px" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" href="assets/hero-dashboard.webp" imagesrcset="assets/hero-dashboard-700.webp 700w, assets/hero-dashboard.webp 1400w" imagesizes="(max-width: 900px) 92vw, 540px">
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-var.woff2" crossorigin>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='t' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%232c5a42'/%3E%3Cstop offset='1' stop-color='%231a3a2a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='18' fill='url(%23t)'/%3E%3Cpath d='M16 44h8V28h-8zm24 0h8V34h-8z' fill='%23f0f7f3'/%3E%3Cpath d='M28 44h8V20h-8z' fill='%236ee7b7'/%3E%3C/svg%3E">
+<link rel="manifest" href="site.webmanifest">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
 <style>
   /* PricingHub · the Labs family look. Porcelain ground, forest night for the dark bands with mint on them,
      and PricingHub's own teal kept as its accent. Inter sets the words; IBM Plex Mono sets every figure. */
@@ -398,6 +400,7 @@
     .lb-body{max-height:60vh}.lb-body img{max-height:60vh}
   }
 </style>
+<link rel="stylesheet" href="assets/labs/labs-glass.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -453,7 +456,7 @@
           <div><b>0</b>macros or add-ins</div>
         </div>
       </div>
-      <figure class="hero-shot"><img src="assets/hero-dashboard.jpg" srcset="assets/hero-dashboard-700.jpg 700w, assets/hero-dashboard.jpg 1400w" sizes="(max-width: 900px) 92vw, 540px" width="1400" height="699" alt="Dashboard with 16 KPIs, alerts and charts" fetchpriority="high"></figure>
+      <figure class="hero-shot"><picture><source type="image/webp" srcset="assets/hero-dashboard-700.webp 700w, assets/hero-dashboard.webp 1400w" sizes="(max-width: 900px) 92vw, 540px"><img src="assets/hero-dashboard.jpg" width="1400" height="699" alt="Dashboard with 16 KPIs, alerts and charts" fetchpriority="high" fetchpriority="high"></picture></figure>
     </div>
   </section>
 
@@ -468,7 +471,7 @@
           <h3>Your job</h3>
           <p class="hint">Example numbers are pre-filled. Replace them with a real quote.</p>
           <div class="field"><label for="cost">Estimated cost<small>Labor, materials, subs, permits, everything</small></label><div class="inp" data-prefix="$"><input id="cost" type="number" inputmode="decimal" min="0" step="any" value="36860" required></div></div>
-          <div class="field"><label for="markup">Markup on cost<small>Workbook default by category: 15–35 %</small></label><div class="inp" data-suffix="%"><input id="markup" type="number" inputmode="decimal" min="0" max="300" step="any" value="21" required></div></div>
+          <div class="field"><label for="markup">Markup on cost<small>Workbook default by category: 15 to 35 %</small></label><div class="inp" data-suffix="%"><input id="markup" type="number" inputmode="decimal" min="0" max="300" step="any" value="21" required></div></div>
           <div class="field"><label for="cont">Contingency<small>Added on the proposal subtotal</small></label><div class="inp" data-suffix="%"><input id="cont" type="number" inputmode="decimal" min="0" max="50" step="any" value="5" required></div></div>
           <div class="field"><label for="oh">Overhead<small>Share of revenue that keeps the lights on</small></label><div class="inp" data-suffix="%"><input id="oh" type="number" inputmode="decimal" min="0" max="80" step="any" value="10" required></div></div>
           <div class="field"><label for="over">Cost overrun<small>How far actual cost runs past the estimate</small></label><div class="inp" data-suffix="%"><input id="over" type="number" inputmode="decimal" min="-50" max="200" step="any" value="10" required></div></div>
@@ -515,7 +518,7 @@
       <div class="steps reveal">
         <ol class="step-list" id="stepList" aria-label="Setup steps"></ol>
         <div class="stage-card">
-          <div class="stage-img"><img id="stageImg" src="assets/steps/settings.jpg" width="1200" height="720" alt=""><span class="tag" id="stageTag"></span></div>
+          <div class="stage-img"><picture><source id="stageSrc" type="image/webp" srcset="assets/steps/settings.webp"><img id="stageImg" src="assets/steps/settings.jpg" width="1200" height="720" alt=""></picture><span class="tag" id="stageTag"></span></div>
           <div class="progress" aria-hidden="true"><i id="stageBar"></i></div>
           <div class="stage-body">
             <div><h3 id="stageTitle"></h3><p id="stageText"></p></div>
@@ -534,12 +537,12 @@
       <p class="sub reveal">Six of the 24 sheets, from the sample file's three worked jobs for a fictional remodeler. Open any image full size; use the arrow keys to move between them. The walkthrough above covers the rest.</p>
       <p class="swipe-hint" aria-hidden="true">Swipe sideways for the next sheet →</p>
       <div class="gallery" id="gallery">
-        <button class="shot reveal" type="button" data-i="0"><img loading="lazy" decoding="async" width="1400" height="1400" src="assets/02-schedule.jpg" srcset="assets/02-schedule-700.jpg 700w, assets/02-schedule.jpg 1400w" sizes="(max-width: 760px) 84vw, 360px" alt="Gantt schedule, daily log and mileage"><span class="cap"><span><b>Schedule, daily log, mileage</b>Gantt bars, weather and work-done log, miles at your rate.</span><span class="zoom" aria-hidden="true">⤢</span></span></button>
-        <button class="shot reveal" type="button" data-i="1"><img loading="lazy" decoding="async" width="1400" height="1400" src="assets/03-estimate.jpg" srcset="assets/03-estimate-700.jpg 700w, assets/03-estimate.jpg 1400w" sizes="(max-width: 760px) 84vw, 360px" alt="Estimate and cost library"><span class="cap"><span><b>Estimate &amp; price book</b>Markup by category, proposal line numbers, library lookups.</span><span class="zoom" aria-hidden="true">⤢</span></span></button>
-        <button class="shot reveal" type="button" data-i="2"><img loading="lazy" decoding="async" width="1400" height="1400" src="assets/04-proposal.jpg" srcset="assets/04-proposal-700.jpg 700w, assets/04-proposal.jpg 1400w" sizes="(max-width: 760px) 84vw, 360px" alt="Client-ready proposal"><span class="cap"><span><b>Proposal</b>Scope summary, contingency, tax, deposit schedule, detailed lines.</span><span class="zoom" aria-hidden="true">⤢</span></span></button>
-        <button class="shot reveal" type="button" data-i="3"><img loading="lazy" decoding="async" width="1400" height="1400" src="assets/05-job-profit-report.jpg" srcset="assets/05-job-profit-report-700.jpg 700w, assets/05-job-profit-report.jpg 1400w" sizes="(max-width: 760px) 84vw, 360px" alt="Job profit report"><span class="cap"><span><b>Job Profit Report</b>Budget vs actual per category and cost code.</span><span class="zoom" aria-hidden="true">⤢</span></span></button>
-        <button class="shot reveal" type="button" data-i="4"><img loading="lazy" decoding="async" width="1400" height="1400" src="assets/07-change-orders.jpg" srcset="assets/07-change-orders-700.jpg 700w, assets/07-change-orders.jpg 1400w" sizes="(max-width: 760px) 84vw, 360px" alt="Change orders and CO form"><span class="cap"><span><b>Change orders</b>Log, approve, print the signature-ready form.</span><span class="zoom" aria-hidden="true">⤢</span></span></button>
-        <button class="shot reveal" type="button" data-i="5"><img loading="lazy" decoding="async" width="1400" height="1400" src="assets/08-invoices-reports.jpg" srcset="assets/08-invoices-reports-700.jpg 700w, assets/08-invoices-reports.jpg 1400w" sizes="(max-width: 760px) 84vw, 360px" alt="Invoice, statement, reports and payments"><span class="cap"><span><b>Invoices, statements, reports</b>Printable invoice, client statement, aging and cash forecast.</span><span class="zoom" aria-hidden="true">⤢</span></span></button>
+        <button class="shot reveal" type="button" data-i="0"><picture><source type="image/webp" srcset="assets/02-schedule-700.webp 700w, assets/02-schedule.webp 1400w" sizes="(max-width: 760px) 84vw, 360px"><img loading="lazy" decoding="async" width="1400" height="1400" src="assets/02-schedule.jpg" srcset="assets/02-schedule-700.jpg 700w, assets/02-schedule.jpg 1400w" sizes="(max-width: 760px) 84vw, 360px" alt="Gantt schedule, daily log and mileage"></picture><span class="cap"><span><b>Schedule, daily log, mileage</b>Gantt bars, weather and work-done log, miles at your rate.</span><span class="zoom" aria-hidden="true">⤢</span></span></button>
+        <button class="shot reveal" type="button" data-i="1"><picture><source type="image/webp" srcset="assets/03-estimate-700.webp 700w, assets/03-estimate.webp 1400w" sizes="(max-width: 760px) 84vw, 360px"><img loading="lazy" decoding="async" width="1400" height="1400" src="assets/03-estimate.jpg" srcset="assets/03-estimate-700.jpg 700w, assets/03-estimate.jpg 1400w" sizes="(max-width: 760px) 84vw, 360px" alt="Estimate and cost library"></picture><span class="cap"><span><b>Estimate &amp; price book</b>Markup by category, proposal line numbers, library lookups.</span><span class="zoom" aria-hidden="true">⤢</span></span></button>
+        <button class="shot reveal" type="button" data-i="2"><picture><source type="image/webp" srcset="assets/04-proposal-700.webp 700w, assets/04-proposal.webp 1400w" sizes="(max-width: 760px) 84vw, 360px"><img loading="lazy" decoding="async" width="1400" height="1400" src="assets/04-proposal.jpg" srcset="assets/04-proposal-700.jpg 700w, assets/04-proposal.jpg 1400w" sizes="(max-width: 760px) 84vw, 360px" alt="Client-ready proposal"></picture><span class="cap"><span><b>Proposal</b>Scope summary, contingency, tax, deposit schedule, detailed lines.</span><span class="zoom" aria-hidden="true">⤢</span></span></button>
+        <button class="shot reveal" type="button" data-i="3"><picture><source type="image/webp" srcset="assets/05-job-profit-report-700.webp 700w, assets/05-job-profit-report.webp 1400w" sizes="(max-width: 760px) 84vw, 360px"><img loading="lazy" decoding="async" width="1400" height="1400" src="assets/05-job-profit-report.jpg" srcset="assets/05-job-profit-report-700.jpg 700w, assets/05-job-profit-report.jpg 1400w" sizes="(max-width: 760px) 84vw, 360px" alt="Job profit report"></picture><span class="cap"><span><b>Job Profit Report</b>Budget vs actual per category and cost code.</span><span class="zoom" aria-hidden="true">⤢</span></span></button>
+        <button class="shot reveal" type="button" data-i="4"><picture><source type="image/webp" srcset="assets/07-change-orders-700.webp 700w, assets/07-change-orders.webp 1400w" sizes="(max-width: 760px) 84vw, 360px"><img loading="lazy" decoding="async" width="1400" height="1400" src="assets/07-change-orders.jpg" srcset="assets/07-change-orders-700.jpg 700w, assets/07-change-orders.jpg 1400w" sizes="(max-width: 760px) 84vw, 360px" alt="Change orders and CO form"></picture><span class="cap"><span><b>Change orders</b>Log, approve, print the signature-ready form.</span><span class="zoom" aria-hidden="true">⤢</span></span></button>
+        <button class="shot reveal" type="button" data-i="5"><picture><source type="image/webp" srcset="assets/08-invoices-reports-700.webp 700w, assets/08-invoices-reports.webp 1400w" sizes="(max-width: 760px) 84vw, 360px"><img loading="lazy" decoding="async" width="1400" height="1400" src="assets/08-invoices-reports.jpg" srcset="assets/08-invoices-reports-700.jpg 700w, assets/08-invoices-reports.jpg 1400w" sizes="(max-width: 760px) 84vw, 360px" alt="Invoice, statement, reports and payments"></picture><span class="cap"><span><b>Invoices, statements, reports</b>Printable invoice, client statement, aging and cash forecast.</span><span class="zoom" aria-hidden="true">⤢</span></span></button>
       </div>
       <p class="kicker" style="margin-top:44px">The documents your clients receive</p>
       <h3 style="margin:0 0 6px;font-size:22px;font-weight:600;color:var(--ink)">Printed straight from the sample workbook.</h3>
@@ -567,7 +570,7 @@
       <p class="sub reveal">Honest answers per platform. The workbook uses plain formulas only, so nothing needs installing.</p>
       <div class="seg reveal" role="group" aria-label="Spreadsheet application" id="fitSeg">
         <button type="button" data-fit="365" aria-pressed="true">Microsoft 365</button>
-        <button type="button" data-fit="2016" aria-pressed="false">Excel 2016–2021</button>
+        <button type="button" data-fit="2016" aria-pressed="false">Excel 2016 to 2021</button>
         <button type="button" data-fit="mac" aria-pressed="false">Excel for Mac</button>
         <button type="button" data-fit="web" aria-pressed="false">Excel for iPad / web</button>
         <button type="button" data-fit="sheets" aria-pressed="false">Google Sheets</button>
@@ -597,12 +600,12 @@
         <h2 class="reveal">What you get</h2>
         <p class="sub reveal">Instant download after purchase. Open the sample first, then start the blank file with the ten-minute guide.</p>
         <ul class="checks reveal">
-          <li><b>SAMPLE workbook (.xlsx)</b> — three worked jobs, crew, vendors, schedule, invoices.</li>
-          <li><b>BLANK workbook (.xlsx)</b> — ready for your business, with 24 editable cost codes.</li>
-          <li><b>Quick-Start Guide (PDF)</b> — ten-minute setup, sheet-by-sheet walkthrough, FAQ.</li>
-          <li><b>Verified</b> — 893 automated formula checks plus 46 bad-data probes of the built-in Health Check.</li>
-          <li><b>Yours</b> — one-time purchase for your own business, on any number of your devices.</li>
-          <li><b>Version 1.0 (September 2026)</b> — updates are added to the same listing; re-download from your Etsy purchases page.</li>
+          <li><b>SAMPLE workbook (.xlsx)</b> three worked jobs, crew, vendors, schedule, invoices.</li>
+          <li><b>BLANK workbook (.xlsx)</b> ready for your business, with 24 editable cost codes.</li>
+          <li><b>Quick-Start Guide (PDF)</b> ten-minute setup, sheet-by-sheet walkthrough, FAQ.</li>
+          <li><b>Verified</b> 893 automated formula checks plus 46 bad-data probes of the built-in Health Check.</li>
+          <li><b>Yours</b> one-time purchase for your own business, on any number of your devices.</li>
+          <li><b>Version 1.0 (September 2026)</b> updates are added to the same listing; re-download from your Etsy purchases page.</li>
         </ul>
         <p class="reveal" style="margin:22px 0 0"><a class="btn btn-soft" href="assets/quick-start-guide.pdf" target="_blank" rel="noopener" style="padding:12px 18px;font-size:15px">Read the guide before you buy <span style="font-weight:500;color:var(--muted)">· PDF, 4 pages</span></a></p>
       </div>
@@ -748,13 +751,18 @@
   const list = $("stepList"); let step = 0;
   STEPS.forEach((st, i) => { const li = document.createElement("li"); li.innerHTML = `<button class="step" type="button" data-i="${i}"><span class="n">${i + 1}</span><span><b>${st[1]}</b><small>${st[0]}</small></span></button>`; list.appendChild(li); });
   const stepBtns = [...list.querySelectorAll(".step")], stImg = $("stageImg");
+  /* one canvas answers whether this browser takes WebP; the steps are 40% lighter in it */
+  const WEBP = (() => { try { return document.createElement("canvas").toDataURL("image/webp").indexOf("data:image/webp") === 0; } catch (e) { return false; } })();
+  const stepSrc = (key) => `assets/steps/${key}.${WEBP ? "webp" : "jpg"}`;
   function go(i, focusBtn) {
     step = (i + STEPS.length) % STEPS.length; const [sheet, title, text, key] = STEPS[step];
     stepBtns.forEach((b, k) => { if (k === step) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current"); });
-    const swap = () => { stImg.src = `assets/steps/${key}.jpg`; stImg.alt = `${sheet} sheet from the sample workbook`; stImg.onload = stImg.onerror = () => stImg.classList.remove("out"); };
+    const swap = () => { const ws = document.getElementById("stageSrc");
+      if (ws) ws.srcset = `assets/steps/${key}.webp`;
+      stImg.src = `assets/steps/${key}.jpg`; stImg.alt = `${sheet} sheet from the sample workbook`; stImg.onload = stImg.onerror = () => stImg.classList.remove("out"); };
     if (reduce) swap(); else { stImg.classList.add("out"); setTimeout(swap, 120); }
     $("stageTag").textContent = sheet; $("stageTitle").textContent = title; $("stageText").textContent = text; $("stageCount").textContent = `Step ${step + 1} of ${STEPS.length}`; $("stageBar").style.width = ((step + 1) / STEPS.length * 100) + "%";
-    new Image().src = `assets/steps/${STEPS[(step + 1) % STEPS.length][3]}.jpg`;
+    new Image().src = stepSrc(STEPS[(step + 1) % STEPS.length][3]);
     if (focusBtn) stepBtns[step].focus();
     if (window.innerWidth <= 900) stepBtns[step].scrollIntoView({ block: "nearest", inline: "center", behavior: reduce ? "auto" : "smooth" });
   }
@@ -856,7 +864,7 @@
     "Painter": ["Prep, coatings and surfaces replace framing and structure.", {"03":"Pressure washing & prep","04":"Surface repair & patching","05":"Prep labor","06":"Primer & sundries","07":"Exterior painting labor","09":"Stain & exterior finishes","10":"Caulk & sealants","11":"Wallpaper removal","12":"Cabinet refinishing","13":"Drywall repair","16":"Floor protection","17":"Cabinet painting","18":"Sprayer & masking supplies"}],
     "Roofer": ["Tear-off, decking, underlayment and the roof system itself.", {"03":"Tear-off","04":"Decking replacement","05":"Underlayment & flashing labor","06":"Shingles & underlayment","08":"Skylights","09":"Gutters & fascia","10":"Vents & pipe boots","11":"Ridge vent & ventilation","12":"Ice & water shield","13":"Attic insulation","14":"Roof installation labor","15":"Sealants & coatings","16":"Metal roofing","17":"Flat roof / membrane","18":"Chimney & flashing"}],
     "Electrician": ["Rough-in, devices, panels and specialty installs.", {"03":"Trenching & underground","04":"Service entrance","05":"Rough-in labor","06":"Wire & conduit","07":"Panels & breakers","08":"Devices & switches","09":"Exterior lighting","10":"Lighting fixtures","11":"Finish labor","12":"EV charger / generator","13":"Low-voltage & data","14":"Troubleshooting labor","15":"Smoke & CO detectors","16":"Ceiling fans","17":"Panel upgrades"}],
-    "Plumber": ["Rough-in, fixtures, water heaters, gas and service work.", {"03":"Trenching & sewer","04":"Slab & foundation work","05":"Rough-in labor","06":"Pipe & fittings","07":"Water heaters","08":"Fixtures — bath","09":"Fixtures — kitchen","10":"Drain cleaning","11":"Gas lines","12":"Water treatment","13":"Insulation & access panels","14":"Finish labor","15":"Service calls & repairs","16":"Tile & wall repair","17":"Vanities & cabinets"}],
+    "Plumber": ["Rough-in, fixtures, water heaters, gas and service work.", {"03":"Trenching & sewer","04":"Slab & foundation work","05":"Rough-in labor","06":"Pipe & fittings","07":"Water heaters","08":"Fixtures: bath","09":"Fixtures: kitchen","10":"Drain cleaning","11":"Gas lines","12":"Water treatment","13":"Insulation & access panels","14":"Finish labor","15":"Service calls & repairs","16":"Tile & wall repair","17":"Vanities & cabinets"}],
     "Landscaper": ["Grading, planting, hardscape, irrigation and maintenance.", {"03":"Grading & excavation","04":"Retaining walls & footings","05":"Install labor","06":"Plants & trees","07":"Irrigation","08":"Fencing & gates","09":"Hardscape / pavers","10":"Drainage","11":"Landscape lighting","12":"Mulch & soil","13":"Sod & seeding","14":"Maintenance labor","15":"Turf & lawn treatments","16":"Stone & gravel","17":"Outdoor structures","18":"Water features"}],
     "Flooring & tile": ["Prep, underlayment, setting and finishing.", {"03":"Floor prep & leveling","04":"Subfloor repair","05":"Install labor","06":"Underlayment & adhesives","07":"Removal & disposal","08":"Transitions & trim","09":"Baseboards & shoe molding","10":"Waterproofing","11":"Heated floor systems","12":"Grout & sealers","13":"Backer board","14":"Tile setting labor","15":"Stain & finish","17":"Shower & niche work","18":"Thresholds & edging"}]
   };
@@ -910,5 +918,6 @@
   if ("IntersectionObserver" in window) new IntersectionObserver(es => es.forEach(e => { stick.classList.toggle("on", !e.isIntersecting); stick.setAttribute("aria-hidden", String(e.isIntersecting)); }), { threshold: 0.05 }).observe(hero);
 })();
 </script>
+<script type="module" src="assets/labs/labs-init.js"></script>
 </body>
 </html>

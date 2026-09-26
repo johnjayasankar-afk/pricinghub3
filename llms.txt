@@ -1,0 +1,21 @@
+# PricingHub
+
+> Job costing for contractors, as a spreadsheet. 24 connected sheets in Excel and
+> Google Sheets: estimate, proposal, schedule, crew hours, change orders, invoices,
+> and a dashboard of budget against actual. No subscription, no add-ins, no macros.
+
+One page of static HTML. The margin calculator on the page runs in the browser.
+
+## On this page
+
+- [Profit check](https://pricing-hub-seven.vercel.app/#calc): type a job and see the margin before you quote it.
+- [What it does](https://pricing-hub-seven.vercel.app/#what): the 24 sheets and how they connect.
+- [First ten minutes](https://pricing-hub-seven.vercel.app/#start): the setup order.
+- [Tour](https://pricing-hub-seven.vercel.app/#tour): each sheet, with a screenshot.
+- [Fit check](https://pricing-hub-seven.vercel.app/#fit): who it suits and who it does not.
+- [FAQ](https://pricing-hub-seven.vercel.app/#faq)
+
+## Elsewhere
+
+- [Labs](https://labs.johnjayasankar.com/)
+- Contact: johnjayasankar@gmail.com

@@ -1,0 +1,38 @@
+{
+  "name": "PricingHub",
+  "short_name": "PricingHub",
+  "description": "Job costing for contractors in Excel and Google Sheets: estimate, proposal, schedule, invoices and a budget-versus-actual dashboard.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "id": "/",
+  "background_color": "#f8f6f1",
+  "theme_color": "#f8f6f1",
+  "lang": "en-US",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
